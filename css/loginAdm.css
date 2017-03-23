@@ -1,0 +1,29 @@
+div#login{
+    max-width: 400px;
+    position:relative;
+    left:32%;
+    top: 50%;
+    border-style: solid;
+    padding: 30px;
+    margin: 10px;
+}
+
+.titulo1{
+    text-align: center;
+    color: #8B4513;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.titulo2{
+    text-align: center;
+    color: #8B4513;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
+div#area{
+    background-color: #FFA07A;
+    margin: 0px;
+    padding: 0px;
+}
