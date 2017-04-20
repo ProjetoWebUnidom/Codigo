@@ -1,7 +1,7 @@
 <?php
 session_start();
     include "../../includes/conexao.php";
-    include "banco-usuario.php";
+    include "banco-funcionario.php";
 
     $usuario=filter_input(INPUT_GET,'nUsuario');
     $senha=filter_input(INPUT_GET,'nSenha');
