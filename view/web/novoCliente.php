@@ -19,6 +19,7 @@ and open the template in the editor.
         <script src="../../js/mascaras_jquery.js" type="text/javascript"></script>
         <script>
             $(document).ready(function () {
+               $("#enviar").fadeOut();
                $("#clienteExistente").fadeIn();
                $("#novoCliente").fadeOut();
                $("#subId").click(function(){
@@ -28,12 +29,14 @@ and open the template in the editor.
                });
                jQuery("#iCpf").mask("999.999.999-99");
                jQuery("#iCelularC").mask("(99) 99999-9999");
-               
+
                $("input[type='radio']").click(function(){
                     var opcao=$("input[name='optradio']:checked").val();
+                    $("#enviar").fadeIn();
                     if(opcao==="existente"){
                         $("#clienteExistente").slideDown(1000);
                         $("#novoCliente").slideUp(1000);
+                        $("#enviar").fadeOut();
                     }else{
                         $("#clienteExistente").slideUp(1000);
                         $("#novoCliente").slideDown(1000);
@@ -50,10 +53,15 @@ and open the template in the editor.
     <body>
         <div class="container">
         <?php
-            include "../../includes/headerAdm.html";
+        if(isset($_GET["fun"]) && $_GET["fun"]==1){
+          include "../../includes/headerFuncionario.html";
+        }else{
+          include "../../includes/headerAdm.html";
+        }
+
         ?>
         <h2 style="text-align:center;">Novo cliente</h2>
-        
+
         <form action="../php/cadastrarNovoCliente.php" method="post" class="form-horizontal">
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
@@ -63,7 +71,7 @@ and open the template in the editor.
             <div class="col-sm-6">
             </div>
           </div>
-            
+
         <div id="clienteExistente" class="form-group">
             <label class="control-label col-sm-2">Id:</label>
             <div class="col-sm-2">
@@ -75,7 +83,7 @@ and open the template in the editor.
             <div class="col-sm-offset-2 col-sm-4">
             </div>
         </div>
-              
+
           <div class="form-group">
             <label class="control-label col-sm-2" for="iNome">*Nome:</label>
             <div class="col-sm-4">
@@ -86,6 +94,7 @@ and open the template in the editor.
                 <input type="text" class="form-control" id="iBairro" name="nBairro" placeholder="Entre com seu bairro" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
             </div>
           </div>
+
           <div id="novoCliente">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="iEnd">Endereço:</label>
@@ -97,7 +106,6 @@ and open the template in the editor.
                       <input type="email" class="form-control" id="iEmail" name="nEmail" placeholder="Insira um email válido" value="<?php echo "".isset($_GET['email'])? $_GET['email'] : ''?>">
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="iCel">Telefone:</label>
                   <div class="col-sm-4">
@@ -116,46 +124,26 @@ and open the template in the editor.
                   <label class="control-label col-sm-2" for="iDet">Como chegar:</label>
                   <div class="col-sm-10">
                       <textarea id="iDet" name="nDet" rows="4" class="form-control" placeholder="Preencha este campo com detalhes que possam nos ajudar a encontrar o endereço mais facilmente"></textarea>
-                  </div>  
+                  </div>
                 </div>
           </div>
+
           <div class="form-group">
                 <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCpf" name="nCpf" placeholder="Insira o CPF do cliente">
+                <input type="text" class="form-control" id="iCpf" name="nCpf" value="<?php echo "".isset($_GET['cpf'])? $_GET['cpf'] : ''?>" placeholder="Insira o CPF do cliente">
             </div>
               <label class="control-label col-sm-2" for="iDtNasc">Data nascimento:</label>
             <div class="col-sm-4">
-                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" placeholder="Data de nascimento do titular">
+                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" value="<?php echo "".isset($_GET['data'])? $_GET['data'] : ''?>" placeholder="Data de nascimento do titular">
             </div>
           </div>
-            
-          <div class="form-group">
-                <label class="control-label col-sm-2" for="iConj">Cônjugue:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="iConj" name="nConj" placeholder="Cônjugue do cliente">
-            </div>
-              <label class="control-label col-sm-2" for="iDtNascC">Data nascimento:</label>
-            <div class="col-sm-4">
-                <input type="Date" class="form-control" id="iDtNascC" name="nDtNascC" placeholder="Data de nascimento do cônjugue">
-            </div>
-          </div>
-          
-          <div class="form-group">
-                <label class="control-label col-sm-2" for="iCelularC">Celular:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCelularC" name="nCelularC"  onkeypress="mascara(this)" placeholder="Celular do Cônjugue">
-            </div>
-            <div class="col-sm-6">
-            </div>
-          </div>
-         
           <div class="form-group">
             <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
           </div>
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="submit" class="btn btn-primary btn-block">E n  v i a r</button>
+              <button id="enviar" type="submit" class="btn btn-primary btn-block">E n  v i a r</button>
             </div>
           </div>
         </form>

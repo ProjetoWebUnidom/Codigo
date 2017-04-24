@@ -1,10 +1,9 @@
 <?php
-
-    include "../../includes/conexao.php";
     function buscarUsuario($conn,$usuario,$senha){
-        $sql = "SELECT * FROM funcionario "
-                . "WHERE LOGIN_Funcionario='{$usuario}' AND SENHA_funcionario='{$senha}' AND ID_TipoUsuario>=2";
-        $resultado = $conn->query($sql);
-        $usuario = mysqli_fetch_assoc($resultado);
-        return $usuario;
+      $stmt = $conn->prepare("SELECT LOGIN_Funcionario,ID_TipoUsuario FROM funcionario WHERE LOGIN_Funcionario = ?
+                                AND SENHA_Funcionario = ? AND ID_TipoUsuario>=2");
+      $stmt->bind_param("ss",$usuario,$senha);
+      $stmt->execute();
+      $resultado = $stmt->get_result();
+      return $resultado;
     }

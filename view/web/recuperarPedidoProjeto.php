@@ -10,9 +10,9 @@ session_start();
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="../../js/jquery.dataTables.js" type="text/javascript"></script>
         <script src="../../js/jquery.dataTables.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="../../css/estilofooter.css">  
+        <link rel="stylesheet" href="../../css/estilofooter.css">
         <script>
-        
+
         $(document).ready(function() {
             $('#example').DataTable( {
                 "pagingType": "full_numbers",
@@ -37,9 +37,9 @@ session_start();
         } );
         </script>
     </head>
-    
+
 <?php
-    
+
     include "../../includes/conexao.php";
     $id=filter_input(INPUT_GET,'id');
     if(isset($_GET["id"])){
@@ -52,12 +52,16 @@ session_start();
             . "FROM pedidoprojeto JOIN telefone WHERE pedidoprojeto.id=telefone.idcliente "
             . "ORDER BY datapr,hora";
     $resultado = $conn->query($sql);
-    
+
             ?>
             <body>
                 <div class="container">
                 <?php
-                    include "../../includes/headerAdm.html";
+                if(isset($_GET["fun"]) && $_GET["fun"]==1){
+                  include "../../includes/headerFuncionario.html";
+                }else{
+                  include "../../includes/headerAdm.html";
+                }
                 ?>
                 <table id="example" class="display" cellspacing="6" width="100%">
                     <thead>
