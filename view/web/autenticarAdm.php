@@ -10,7 +10,7 @@ session_start();
         <link rel="stylesheet" href="../../css/estilofooter.css">
         <link href="../../css/loginAdm.css" rel="stylesheet" type="text/css"/>
     </head>
-        
+
     <body>
         <div class="container">
             <?php
@@ -27,7 +27,7 @@ session_start();
             <h2 class="titulo1">Área protegida</h2>
             <h3 class="titulo2">Digite seu usuário e senha</h3>
             <div id="login">
-                <form action="../php/validarLogin.php" method="get" name="frmlogin">
+                <form action="../php/validarLogin.php" method="post" name="frmlogin">
                 <div class="form-group">
                     <label for="usuario">Usuário:</label>
                     <input type="text" class="form-control" name="nUsuario" id="usuario" placeholder="Usuário">
@@ -40,7 +40,7 @@ session_start();
             </form>
                 </div>
             </div>
-            
+
             <?php
                 include "../../includes/footer.html";
             ?>
