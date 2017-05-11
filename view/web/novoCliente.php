@@ -1,5 +1,7 @@
 <?php
 session_start();
+include "../php/permissao.php";
+perfil();
 ?>
 <!DOCTYPE html>
 <!--
@@ -52,14 +54,6 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
-        <?php
-        if(isset($_GET["fun"]) && $_GET["fun"]==1){
-          include "../../includes/headerFuncionario.html";
-        }else{
-          include "../../includes/headerAdm.html";
-        }
-
-        ?>
         <h2 style="text-align:center;">Novo cliente</h2>
 
         <form action="../php/cadastrarNovoCliente.php" method="post" class="form-horizontal">
@@ -119,7 +113,6 @@ and open the template in the editor.
                       <label class="checkbox-inline"><input type="checkbox" name="projeto[]" value="Banheiro">Banheiro(s)</label>
                   </div>
                 </div>
-
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="iDet">Como chegar:</label>
                   <div class="col-sm-10">

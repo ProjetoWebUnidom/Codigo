@@ -1,5 +1,8 @@
 <?php
-session_start();
+    session_start();
+    include "../php/permissao.php";
+    perfil();
+
 ?>
 <html>
     <head>
@@ -56,13 +59,7 @@ session_start();
             ?>
             <body>
                 <div class="container">
-                <?php
-                if(isset($_GET["fun"]) && $_GET["fun"]==1){
-                  include "../../includes/headerFuncionario.html";
-                }else{
-                  include "../../includes/headerAdm.html";
-                }
-                ?>
+
                 <table id="example" class="display" cellspacing="6" width="100%">
                     <thead>
                         <th>Data</th>

@@ -1,25 +1,25 @@
 <?php
-session_start();
+    session_start();
     include "../../includes/conexao.php";
     include "banco-funcionario.php";
+    include "permissao.php";
 
     $usuario=filter_input(INPUT_POST,'nUsuario');
     $senha=filter_input(INPUT_POST,'nSenha');
     echo $senha;
     echo $usuario;
     $row = buscarUsuario($conn,$usuario,$senha);
-    $user= $row->fetch_array(MYSQLI_NUM);
-    var_dump($user);
-    $permissao= $user[1];
+    $user= $row["LOGIN_Funcionario"];
+    $permissao= $row["ID_TipoUsuario"];
     $redirecionar="";
-    if($user[0]==""){
+
+    if(empty($user)){
         $redirecionar="../web/autenticarAdm.php?code=0";
+        session_destroy();
+        unset($_SESSION["login"]);
     }else{
-      if($permissao==4){
-        $redirecionar="../web/recuperarPedidoProjeto.php";
-      }elseif($permissao==3){
-        $redirecionar="../web/recuperarPedidoProjeto.php?fun=1";
-      }
+      permissaoAcesso($permissao);
+      $redirecionar = "../web/recuperarPedidoProjeto.php";
 
     }
     $conn->close();

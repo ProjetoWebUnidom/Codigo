@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include "../php/permissao.php";
+    perfil();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,11 +17,6 @@
 
     <div class="container">
       <?php
-            if(isset($_GET["fun"]) && $_GET["fun"]==1){
-              include "../../includes/headerFuncionario.html";
-            }else{
-              include "../../includes/headerAdm.html";
-            }
             include "../php/banco-categoria.php";
             include "../../includes/conexao.php";
 
