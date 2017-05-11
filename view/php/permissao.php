@@ -1,9 +1,9 @@
 <?php
 
 function permissaoAcesso($acesso){
-  if($acesso==4){
+  if($acesso==2){
     $_SESSION["ID_TipoUsuario"]  = 2;
-  }elseif($acesso ==3){
+  }elseif($acesso ==1){
     $_SESSION["ID_TipoUsuario"]  = 1;
   }
   return $_SESSION["ID_TipoUsuario"];
