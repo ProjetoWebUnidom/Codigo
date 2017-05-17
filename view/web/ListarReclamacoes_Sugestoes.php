@@ -45,16 +45,12 @@ perfil();
     include "../../includes/conexao.php";
     $id=filter_input(INPUT_GET,'id');
     if(isset($_GET["id"])){
-        $sql = "DELETE FROM `protocolo` WHERE `ID_Orcamento` = ".$id;
+        $sql = "DELETE FROM sugestao_reclamacao` WHERE `ID_Sugestao_Reclamacao` = " .$id;
         $conn->query($sql);
-        $sql = "DELETE FROM orcamento WHERE `ID_Orcamento`=".$id;
-        $conn->query($sql);
+
     }
-    $sql = "SELECT SUBSTRING(pr.dt_protocolo, 1, 10) AS data_pedido,
-    SUBSTRING(pr.dt_protocolo, 12) AS hora,
-    nome_orcamento, bairro_orcamento , orc.ID_Orcamento AS id, telefone_orcamento, email_orcamento ,orc.INFORMACAO_Orcamento as item
-    FROM orcamento orc
-    INNER JOIN protocolo pr ON pr.id_orcamento=orc.id_orcamento";
+    $sql = "SELECT `ID_Sugestao_Reclamacao` AS 'id' , `TIPO_Sugestao_Reclamacao` , `NOME_Sugestao_Reclamacao` , `EMAIL_Sugestao_Reclamacao` ,
+    `DESTINARIO_Sugestao` FROM `sugestao_reclamacao`";
     $resultado = $conn->query($sql);
 
             ?>
@@ -62,24 +58,18 @@ perfil();
                 <div class="container">
                 <table id="example" class="display" cellspacing="6" width="100%">
                     <thead>
-                        <th>Data</th>
-                        <th>Hora</th>
+                        <th>Tipo</th>
                         <th>Nome</th>
-                        <th>Telefone</th>
                         <th>E-mail</th>
-                        <th>Bairro</th>
-                        <th>Item</th>
+                        <th>Destinario</th>
                         <th></th>
                         <th></th>
                     </thead>
                     <tfoot>
-                        <th>Data</th>
-                        <th>Hora</th>
+                        <th>Tipo</th>
                         <th>Nome</th>
-                        <th>Telefone</th>
                         <th>E-mail</th>
-                        <th>Bairro</th>
-                        <th>Item</th>
+                        <th>Destinario</th>
                         <th></th>
                         <th></th>
                     </tfoot>
@@ -89,20 +79,14 @@ perfil();
                         if($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) {
                                 if($row["id"]!=$rowAtual){
-                                echo "<tr>";
-                                    echo "<td>".$row["data_pedido"]."</td>";
-                                    echo "<td>".$row["hora"]."</td>";
-                                    echo "<td>".$row["nome_orcamento"]."</td>";
-                                    echo "<td>".$row["telefone_orcamento"]."</td>";
-                                    echo "<td>".$row["email_orcamento"]."</td>";
-                                    echo "<td>".$row["bairro_orcamento"]."</td>";
-                                    echo "<td>".$row["item"]."</td>";
+                                    echo "<td>".$row["TIPO_Sugestao_Reclamacao"]."</td>";
+                                    echo "<td>".$row["NOME_Sugestao_Reclamacao"]."</td>";
+                                    echo "<td>".$row["EMAIL_Sugestao_Reclamacao"]."</td>";
+                                    echo "<td>".$row["DESTINARIO_Sugestao"]."</td>";
                                     echo "<td>";
-                                    echo "<a href='recuperarPedidoProjeto.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
+                                    echo "<a href='ListarReclamacoes_Sugestoes.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
                                     echo "</td>";
                                     echo "<td>";
-                                    echo "<a href='mostrarPedidoProjeto.php?id=".$row["id"]."' target='somethingUnique'><span class='glyphicon glyphicon-info-sign' title='Visualizar'></span></a>";
-                                  //  echo "</td>";
                                     echo "</tr>";
                                 }
                                 $rowAtual=$row["id"];

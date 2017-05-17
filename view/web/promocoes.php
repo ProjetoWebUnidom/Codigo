@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+  session_start();
+ ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -25,7 +28,7 @@
             <form class="form" action="busca-produto.php" method="post">
               <input type="search" name="busca" class="form-control">
               <button type="button" class="btn btn-info">
-                  Buscar
+                  <label for="">Buscar</label>
                   <span class="glyphicon glyphicon-search"></span>
               </button>
             </form>
@@ -39,16 +42,19 @@
                 <?php while ($produto = $total_cursos->fetch_assoc()) { ?>
                  <div class="col-sm-6 col-md-4">
                    <div class="thumbnail">
+                     <a href ="pedido-detalhado.php">
                        <img src="<?=$produto["DIRETORIO_Imagem"]?>" alt="Lights" style="width:100%">
                        <div class="caption text-center">
                          <p><?=$produto["NOME_Produto"]?></p>
                          <p><?=$produto["VALOR_produto"]?></p>
-                         <p><?=$produto["DESCRICAO_produto"]?></p>
+                         <p><?=substr($produto["DESCRICAO_produto"],0,40)?></p>
+                         <?php $_SESSION['produtoNome'] = $produto['NOME_Produto'] ?>
                        </div>
                      </a>
                    </div>
                  </div>
                  <?php }?>
+
         </div>
         <?php
             $pagina_posterior = $pagina + 1;

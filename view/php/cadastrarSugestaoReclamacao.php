@@ -1,23 +1,22 @@
 <?php
 
+    include "../../includes/conexao.php";
+
     $nome=filter_input(INPUT_POST,'nNome');
     $opcaoTipo=filter_input(INPUT_POST,'optradio');
     $paraquem=filter_input(INPUT_POST,'selPara');
     $detalhe=filter_input(INPUT_POST,'nSug');
     $email=filter_input(INPUT_POST,'nEmail');
-    
-    if($opcaoTipo=="sugestao"){
-        $opcaoTipo=0;
-    }else{
-        $opcaoTipo=1;
-    }
-    
-    include "../../includes/conexao.php";
-    
-    $query1 = 'INSERT INTO sugestao(nome,email,paraquem,info,tipo) 
-        VALUES("'.$nome.'","'.$email.'","'.$paraquem.'","'.$detalhe.'","'.$opcaoTipo.'")';
-    
-    $conn->query($query1);
 
-    $conn->close();
+    if($opcaoTipo=="sugestao"){
+      $stmt = $conn->prepare("INSERT INTO `karina`.`sugestao_reclamacao` (`TIPO_Sugestao_Reclamacao`, `NOME_Sugestao_Reclamacao`, `EMAIL_Sugestao_Reclamacao`,
+              `Info_Sugestao_Reclamacao`, `DESTINARIO_Sugestao`)VALUES ('Sugestao',?,?,?,?)");
+      $stmt->bind_param("ssss",$nome,$email,$detalhe,$paraquem);
+      $stmt->execute();
+    }if($opcaoTipo=="reclamacao"){
+      $stmt = $conn->prepare("INSERT INTO `karina`.`sugestao_reclamacao` (`TIPO_Sugestao_Reclamacao`, `NOME_Sugestao_Reclamacao`, `EMAIL_Sugestao_Reclamacao`,
+              `Info_Sugestao_Reclamacao`, `DESTINARIO_Sugestao`)VALUES ('Reclamacao',?,?,?,?)");
+      $stmt->bind_param("ssss",$nome,$email,$detalhe,$paraquem);
+      $stmt->execute();
+    }
     header("location:../web/index.php");

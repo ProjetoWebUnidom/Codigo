@@ -27,8 +27,11 @@
       <form class="form-horizontal" action="../php/buscarProdutos.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
         <center>
-          <?php   if(isset($_SESSION['ok'])){ ?>
-            <p class="alert-success">Alterado com sucesso!</p>
+          <?php  if(isset($_SESSION['ok'])){ ?>
+             <p class="alert-success">Alterado com sucesso!</p>
+          <?php } ?>
+          <?php if(isset($_SESSION['exc'])){ ?>
+              <p class="alert-success">Excluido com sucesso!</p>
             <?php } ?>
           <h1>Produtos</h1>
         </center>
@@ -40,6 +43,7 @@
             </div>
             <div class="col-sm-2">
                 <button type="submit"  name="buscar" value="btBuscar" class="btn btn-primary">Buscar</button>
+                <button type="submit"  name="excluir" value="btExcluir" class="btn btn-primary">Excluir</button>
             </div>
             <div class="col-sm-offset-2 col-sm-4">
             </div>

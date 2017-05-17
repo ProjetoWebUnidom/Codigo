@@ -7,6 +7,7 @@
 
   $bt = filter_input(INPUT_POST,"buscar");
   $btAlterar = filter_input(INPUT_POST,"alterar");
+  $btExcluir = filter_input(INPUT_POST,"excluir");
   $id = $_POST['id'];
   $nome = $_POST['buscaProduto'];
   $nomeProduto = $_POST['nomeProduto'];
@@ -22,6 +23,7 @@
 }
   if(strpos($btAlterar,"btAlterar") !== false){
     alterarProduto($conn,$nomeProduto,$valProduto,$IdTipoCategoria,$descricao,$id);
+    var_dump($_FILES['arquivo']['name']);
     if(isset($_FILES["arquivo"])){
       if(fotoExiste($conn,$diretorio)){
         $upload = validarFoto($_FILES["arquivo"]);
@@ -34,4 +36,8 @@
         }
     $_SESSION['ok'];
     header("location:$redirecionar");
+}
+if(strpos($btExcluir,"btExcluir") !== false){
+  excluirProduto($conn,$nomeProduto);
+  header("location: ../web/alterarProduto.php?exc");
 }

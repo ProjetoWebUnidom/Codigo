@@ -11,7 +11,7 @@
     $stmt->bind_param("s", $nome);
     $stmt->execute();
     $resultado = $stmt->get_result();
-    return $resultado->fetch_object();
+    return $resultado->fetch_assoc();
   }
 
   function buscarProduto($conn,$nome){
@@ -35,7 +35,7 @@
       return $produtos;
   }
   function qtdProdutos($conn,$paginas,$qt_paginas){
-    $stmt = $conn->prepare("SELECT p.NOME_Produto,p.DESCRICAO_produto,p.VALOR_produto,p.ID_TipoCategoria,f.DIRETORIO_Imagem
+    $stmt = $conn->prepare("SELECT p.ID_Produto,p.NOME_Produto,p.DESCRICAO_produto,p.VALOR_produto,p.ID_TipoCategoria,f.DIRETORIO_Imagem
                                 FROM produto AS p JOIN foto AS f WHERE p.ID_Produto = f.ID_Produto LIMIT ?,?");
     $stmt->bind_param("ii",$paginas,$qt_paginas);
     $stmt->execute();
@@ -48,4 +48,19 @@
     $stmt->bind_param("sdisi",$nome,$valor,$idCategoria,$descricao,$id);
     $resultado = $stmt->execute();
     return $resultado;
+  }
+  function excluirProduto($conn,$nome){
+    $id = buscarIdProduto($conn,$nome);
+    excluirFoto($conn,$id['ID_Produto']);
+    $stmt = $conn->prepare("DELETE FROM `produto` WHERE NOME_Produto = ?");
+    $stmt->bind_param("s",$nome);
+    $resultado = $stmt->execute();
+    return $resultado;
+  }
+  function excluirFoto($conn,$id){
+    $stmt = $conn->prepare("DELETE FROM `foto` WHERE ID_Produto = ?");
+    $stmt->bind_param("i",$id);
+    $resultado = $stmt->execute();
+    var_dump($resultado);
+
   }

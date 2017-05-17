@@ -10,9 +10,12 @@ function validarFoto($arquivo){
   $extensao = substr($nome, -4);
   $novoNome = md5(time());
   $upload = $diretorio. basename($novoNome) . $extensao;
+  if(empty($_FILES['arquivo']['name'])){
+    return;
+  }
   if(!preg_match('/^image\/(pjpeg|jpeg|png|gif|bmp)$/',$tipo)){
     echo('Isso não é uma imagem válida');
-    return;
+    exit;
   }
 
   if($tamanho > TAMANHO_MAXIMO){

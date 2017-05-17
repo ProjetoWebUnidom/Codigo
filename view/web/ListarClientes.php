@@ -45,16 +45,12 @@ perfil();
     include "../../includes/conexao.php";
     $id=filter_input(INPUT_GET,'id');
     if(isset($_GET["id"])){
-        $sql = "DELETE FROM `protocolo` WHERE `ID_Orcamento` = ".$id;
+        $sql = "DELETE FROM `karina`.`protocolo` WHERE `ID_Protocolo`=".$id;
         $conn->query($sql);
-        $sql = "DELETE FROM orcamento WHERE `ID_Orcamento`=".$id;
+        $sql = "DELETE FROM orcamento WHERE id=".$id;
         $conn->query($sql);
     }
-    $sql = "SELECT SUBSTRING(pr.dt_protocolo, 1, 10) AS data_pedido,
-    SUBSTRING(pr.dt_protocolo, 12) AS hora,
-    nome_orcamento, bairro_orcamento , orc.ID_Orcamento AS id, telefone_orcamento, email_orcamento ,orc.INFORMACAO_Orcamento as item
-    FROM orcamento orc
-    INNER JOIN protocolo pr ON pr.id_orcamento=orc.id_orcamento";
+    $sql = "SELECT ID_Cliente as id , NOME_Cliente ,BAIRRO_Cliente, CIDADE_Cliente, EMAIL_Cliente,`CPF_Cliente`,CEP_Cliente,UF_Cliente FROM cliente ";
     $resultado = $conn->query($sql);
 
             ?>
@@ -62,24 +58,26 @@ perfil();
                 <div class="container">
                 <table id="example" class="display" cellspacing="6" width="100%">
                     <thead>
-                        <th>Data</th>
-                        <th>Hora</th>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>E-mail</th>
+                        <th>CPF</th>
                         <th>Bairro</th>
-                        <th>Item</th>
+                        <th>Cidade</th>
+                        <th>E-mail</th>
+                        <th>UF</th>
+                        <th>CEP</th>
                         <th></th>
                         <th></th>
                     </thead>
                     <tfoot>
-                        <th>Data</th>
-                        <th>Hora</th>
+                        <th>ID</th>
                         <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>E-mail</th>
+                        <th>CPF</th>
                         <th>Bairro</th>
-                        <th>Item</th>
+                        <th>Cidade</th>
+                        <th>E-mail</th>
+                        <th>UF</th>
+                        <th>CEP</th>
                         <th></th>
                         <th></th>
                     </tfoot>
@@ -90,18 +88,20 @@ perfil();
                             while($row = $resultado->fetch_assoc()) {
                                 if($row["id"]!=$rowAtual){
                                 echo "<tr>";
-                                    echo "<td>".$row["data_pedido"]."</td>";
-                                    echo "<td>".$row["hora"]."</td>";
-                                    echo "<td>".$row["nome_orcamento"]."</td>";
-                                    echo "<td>".$row["telefone_orcamento"]."</td>";
-                                    echo "<td>".$row["email_orcamento"]."</td>";
-                                    echo "<td>".$row["bairro_orcamento"]."</td>";
-                                    echo "<td>".$row["item"]."</td>";
+                                    echo "<td>".$row["id"]."</td>";
+                                    echo "<td>".$row["NOME_Cliente"]."</td>";
+                                    echo "<td>".$row["CPF_Cliente"]."</td>";
+                                    echo "<td>".$row["BAIRRO_Cliente"]."</td>";
+                                    echo "<td>".$row["CIDADE_Cliente"]."</td>";
+                                    echo "<td>".$row["EMAIL_Cliente"]."</td>";
+                                    echo "<td>".$row["UF_Cliente"]."</td>";
+                                    echo "<td>".$row["CEP_Cliente"]."</td>";
+                                //    echo "<td>".$row["bairro_orcamento"]."</td>";
                                     echo "<td>";
-                                    echo "<a href='recuperarPedidoProjeto.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
-                                    echo "</td>";
-                                    echo "<td>";
-                                    echo "<a href='mostrarPedidoProjeto.php?id=".$row["id"]."' target='somethingUnique'><span class='glyphicon glyphicon-info-sign' title='Visualizar'></span></a>";
+                                  //  echo "<a href='recuperarPedidoProjeto.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
+                                   echo "</td>";
+                                   echo "<td>";
+                                  //  echo "<a href='mostrarPedidoProjeto.php?id=".$row["id"]."' target='somethingUnique'><span class='glyphicon glyphicon-info-sign' title='Visualizar'></span></a>";
                                   //  echo "</td>";
                                     echo "</tr>";
                                 }

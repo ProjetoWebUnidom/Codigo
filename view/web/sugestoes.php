@@ -15,7 +15,7 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="../../css/estilofooter.css" rel="stylesheet" type="text/css"/>
-        
+
         <style>
             div img {
                 display: block;
@@ -38,14 +38,14 @@ and open the template in the editor.
                    $("#iCarac").val(tamanho);
                 });
             });
-            
+
         </script>
-        
+
     </head>
     <body>
         <div class="container">
         <?php
-            include "../../includes/header.html";
+            include "../../includes/header.html"; 
         ?>
             <form action="../php/cadastrarSugestaoReclamacao.php" method="post" class="form-horizontal">
           <div class="form-group" style="padding:15px;">
@@ -62,7 +62,7 @@ and open the template in the editor.
                     <option value="Montador">Montadores</option>
                 </select>
                 </div>
-          </div>    
+          </div>
            <div class="form-group">
             <label class="control-label col-sm-2" for="iNome">*Nome:</label>
             <div class="col-sm-4">
@@ -77,7 +77,7 @@ and open the template in the editor.
                 <label id="txtSR" class="control-label col-sm-2" for="iSug">Sugestão:</label>
             <div class="col-sm-10">
                 <textarea id="iSug" name="nSug" rows="4" maxlength="250" class="form-control" placeholder="Preencha aqui sua sugestão / reclamação (Máximo 250 caracteres)"></textarea>
-            </div>  
+            </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="iCarac">Caracteres:</label>
@@ -91,8 +91,8 @@ and open the template in the editor.
             </div>
           </div>
         </form>
-        
-            
+
+
         <?php
             include "../../includes/footer.html";
         ?>
