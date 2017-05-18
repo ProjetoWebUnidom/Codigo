@@ -1,5 +1,7 @@
 <?php
 session_start();
+include "../php/permissao.php";
+perfil();
 ?>
 <!DOCTYPE html>
 <!--
@@ -8,85 +10,40 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Novo_Funcionario</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../../css/estilofooter.css">
-        <script src="../..js/jquery.js"></script>
-        <script src="../../js/mascaras_jquery.js" type="text/javascript"></script>
-        <script>
-            $(document).ready(function () {
-               $("#funcionarioExistente").fadeIn();
-               $("#novoFuncionario").fadeOut();
-			   $("#iEnviar").fadeOut();
-               $("#subId").click(function(){
-                   $("#iForm").attr("action","../php/procurarFuncionario.php");
-				   $("#iForm").submit();
-               });
-               jQuery("#iCpf").mask("999.999.999-99");
-               jQuery("#iCelularC").mask("(99) 99999-9999");
+  <head>
+      <meta charset="UTF-8">
+      <title>Novo Funcionário</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="../../css/estilofooter.css">
+      <script src="../..js/jquery.js"></script>
+      <script src="../../js/mascaras_jquery.js" type="text/javascript"></script>
+      <script>
+      $(document).ready(function () {
+        jQuery("#iCpf").mask("999.999.999-99");
+        jQuery("#iTel").mask("(99) 9999-9999");
+        jQuery("#iRG").mask("99.999.999-99");
+        jQuery("#iCEP").mask("99.999-999");
+      });
 
-               $("input[type='radio']").click(function(){
-                    var opcao=$("input[name='optradio']:checked").val();
-                    if(opcao==="existente"){
-                        $("#funcionarioExistente").slideDown(1000);
-                        $("#novoFuncionario").slideUp(1000);
-						$("#iEnviar").fadeOut();
-						$("#subId").click(function(){
-						   $("#iForm").attr("action","../php/procurarFuncionario.php");
-						   $("#iForm").submit();
-						});
-                    }else{
-                        $("#funcionarioExistente").slideUp(1000);
-                        $("#novoFuncionario").slideDown(1000);
-                        $("#iId").val("");
-                        $("#iNome").val("");
-                        $("#iBairro").val("");
-                        $("#iEnd").val("");
-                        $("#iEmail").val("");
-						$("#iEnviar").fadeIn();
-						$("#iEnviar").click(function(){
-						   $("#iForm").attr("action","../php/cadastrarNovoFuncionario.php");
-						   $("#iForm").submit();
-					    });
-                    }
-                });
-            });
-        </script>
+      </script>
     </head>
     <body>
         <div class="container">
-        <?php
-            include "../../includes/headerAdm.html";
-            include "../../includes/conexao.php";
-            include "../php/banco-funcionario.php";
-            if(isset($_GET["ok"]) && $_GET["ok"]==1){
-              $id = $_GET["id"];
-              $funcionario = buscarFuncionario($conn,$id);
-            }
-        ?>
-        <h2 style="text-align:center;">Novo funcionário</h2>
+        <h2 style="text-align:center;">Novo Funcionário</h2>
 
-        <form id="iForm" action="" method="post" class="form-horizontal">
+        <form action="../php/CadastrandoFuncionario.php" method="post" class="form-horizontal">
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
-                  <label class="radio-inline"><input type="radio" name="optradio" checked="checked" value="existente">Funcionário existente</label>
-                  <label class="radio-inline"><input type="radio" name="optradio" value="novo">Novo funcionário</label>
             </div>
             <div class="col-sm-6">
             </div>
           </div>
 
-        <div id="funcionarioExistente" class="form-group">
-            <label class="control-label col-sm-2">Id:</label>
+        <div id="FuncionarioExistente" class="form-group">
             <div class="col-sm-2">
-            <input type="text" class="form-control" id="iId" name="nId" placeholder="Código do funcionário" value="<?php echo "".isset($_GET['id'])? $_GET['id'] : ''?>">
             </div>
             <div class="col-sm-2">
-                <button id="subId" name="nSubId" value="btBuscar" class="btn btn-primary">Buscar</button>
             </div>
             <div class="col-sm-offset-2 col-sm-4">
             </div>
@@ -95,75 +52,115 @@ and open the template in the editor.
           <div class="form-group">
             <label class="control-label col-sm-2" for="iNome">*Nome:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iNome" name="nNome" value="<?php echo "".isset($funcionario['NOME_Funcionario'])? $funcionario['NOME_Funcionario'] : ''?>" placeholder="Entre com o nome do funcionario">
+                <input type="text" class="form-control" id="iNome" maxlength="150" required name="nNome" value="<?php echo "".isset( $_POST["nome"])?$_POST["nome"]: ''?>" placeholder="Entre com seu nome">
             </div>
-            <label class="control-label col-sm-2" for="iBairro">Bairro:</label>
+            <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iBairro" name="nBairro" placeholder="Entre com o bairro do funcionario" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
+                <input type="text" class="form-control" id="iCpf" name="nCpf" required value="<?php echo "".isset($_GET['cpf'])? $_GET['cpf'] : ''?>" placeholder="Insira o CPF do Funcionário">
             </div>
           </div>
-          <div id="novoFuncionario">
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="iRG">*RG:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="iRG" maxlength="10" onkeypress="mascara(this)" name="nRG" required value="<?php echo "".isset($_GET['rg'])? $_GET['rg'] : ''?>" placeholder="Insira seu RG">
+            </div>
+            <label class="control-label col-sm-2" for="iEmail">*Email:</label>
+            <div class="col-sm-4">
+                <input type="email" class="form-control" id="iEmail" maxlength="100" name="nEmail" required  placeholder="Insira um email válido" value="<?php echo "".isset($_GET['email'])? $_GET['email'] : ''?>">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="iDtNasc">*Data nascimento:</label>
+            <div class="col-sm-4">
+                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" required value="<?php echo "".isset($_GET['data_nasc'])? $_GET['data_nasc'] : ''?>" placeholder="Data de nascimento do titular">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="iCel">Telefone:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="iTel" maxlength="15" onkeypress="mascara(this)" name="nTel" placeholder="Entre com seu telefone para contato">
+            </div>
+            <label class="control-label col-sm-2" for="iCidade">Cidade:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="iCidade" maxlength="80" name="nCidade" placeholder="Entre com sua cidade" value="<?php echo "".isset($_GET['cidade'])? $_GET['cidade'] : ''?>"  >
+            </div>
+          </div>
+
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="iEnd">Endereço:</label>
+                  <label class="control-label col-sm-2" for="iCEP">*CEP:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iEnd" name="nEnd" value="<?php echo "".isset($_GET['endereco'])? $_GET['endereco'] : ''?>" placeholder="Entre com o endereço do funcionario">
+                      <input type="text" class="form-control" id="iCEP" name="nCEP" placeholder="Entre com seu CEP" required value="<?php echo "".isset($_GET['CEP'])? $_GET['CEP'] : ''?>">
                   </div>
-                  <label class="control-label col-sm-2" for="iEmail">*Email:</label>
+                  <label class="control-label col-sm-2" for="iCidade">UF:</label>
                   <div class="col-sm-4">
-                      <input type="email" class="form-control" id="iEmail" name="nEmail" placeholder="Insira um email válido" value="<?php echo "".isset($_GET['email'])? $_GET['email'] : ''?>">
+                      <select type="text" class="form-control" id="iUF" name="nUF" size="1" >
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas </option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option selected value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro </option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                      </select></label>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="iCel">Telefone:</label>
+                  <label class="control-label col-sm-2" for="iNum">Número da casa:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iCel" maxlength="15" onkeypress="mascara(this)" name="nCel" placeholder="Entre com telefone para contato">
+                      <input type="text" class="form-control" id="iNum" maxlength="11" name="nNum" value="<?php echo "".isset( $_POST["num"])?$_POST["num"]: ''?>" placeholder="Entre com o nomero da casa">
+                  </div>
+                  <label class="control-label col-sm-2" for="iBairro">Bairro:</label>
+                  <div class="col-sm-4">
+                      <input type="text" class="form-control" id="iBairro" maxlength="80" name="nBairro" placeholder="Entre com seu bairro" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
                   </div>
                 </div>
-          </div>
-          <div class="form-group">
-                <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCpf" name="nCpf" placeholder="Insira o CPF do funcionário">
-            </div>
-              <label class="control-label col-sm-2" for="iDtNasc">Data nascimento:</label>
-            <div class="col-sm-4">
-                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" placeholder="Data de nascimento do titular">
-            </div>
-          </div>
 
-          <div class="form-group">
-                <label class="control-label col-sm-2" for="iConj">Cônjugue:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="iConj" name="nConj" placeholder="Cônjugue do funcionário">
-            </div>
-              <label class="control-label col-sm-2" for="iDtNascC">Data nascimento:</label>
-            <div class="col-sm-4">
-                <input type="Date" class="form-control" id="iDtNascC" name="nDtNascC" placeholder="Data de nascimento do cônjugue">
-            </div>
-          </div>
-
-          <div class="form-group">
-                <label class="control-label col-sm-2" for="iCelularC">Celular:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCelularC" name="nCelularC"  onkeypress="mascara(this)" placeholder="Celular do Cônjugue">
-            </div>
-            <div class="col-sm-6">
-            </div>
-          </div>
-
+				<div class="form-group">
+                  <label class="control-label col-sm-2" for="iNum">*Login:</label>
+                  <div class="col-sm-4">
+                      <input type="text" class="form-control" id="iLog" maxlength="10" name="nLog" required value=""<?php echo "".isset( $_POST["log"])?$_POST["log"]: ''?>" placeholder="Entre com o seu login"">
+                  </div>
+                  <label class="control-label col-sm-2" for="iSenha">*Senha:</label>
+                  <div class="col-sm-4">
+                      <input type="password" class="form-control" id="iSenha" maxlength="10" name="nSenha" placeholder="Entre com sua senha" required value="<?php echo "".isset($_GET['senha'])? $_GET['senha'] : ''?>">
+                  </div>
+                </div>
           <div class="form-group">
             <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
           </div>
           <div class="form-group">
             <div class="col-sm-12">
-              <button id="iEnviar" value="btCadastrar" class="btn btn-primary btn-block">E n  v i a r</button>
+              <button id="iEnviar" name="nEnviar" value="btCadastrar" class="btn btn-primary btn-block">E n  v i a r</button>
             </div>
           </div>
         </form>
-            <?php
-                include "../../includes/footer.html";
-            ?>
       </div>
     </body>
-</html>
+          <?php
+              include "../../includes/footer.html";
+          ?>
+    </html>
