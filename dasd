@@ -1,0 +1,113 @@
+[33mcommit d6cc4ce50e4fa0cf751b972f16919b2ea4396722[m
+Author: Victor.Fernando <Victor.Fernando>
+Date:   Fri May 19 14:28:50 2017 -0300
+
+    Edição layout
+
+[33mcommit ec469cf31abd137771efde00738e84f0a309693d[m
+Author: Victor.Fernando <Victor.Fernando>
+Date:   Fri May 19 14:18:06 2017 -0300
+
+    Relatorio  -  Clientes cadastrados  - PDF
+
+[33mcommit da081f77dd42d9eae1da1db9afbecf44c749e3ac[m
+Author: Victor.Fernando <Victor.Fernando>
+Date:   Fri May 19 14:04:53 2017 -0300
+
+    Lista de clientes cadastrados
+
+[33mcommit 54cbe12589e4c88b6351a0781bea942290ac8513[m
+Author: Vinicius <vini_shotgun01>
+Date:   Thu May 18 22:03:20 2017 -0300
+
+    incluindo o arquivo para cadastrar o funcionario
+
+[33mcommit d19365d084ad6b80637b47ef767bd26047a5b1f3[m
+Author: Vinicius <vini_shotgun01>
+Date:   Wed May 17 23:14:57 2017 -0300
+
+    Criei o CRUD de funcionario
+
+[33mcommit d5e9d110d3804bf071c61eda6325216341c46fb2[m
+Author: mateus <mateus-vinicius19@live.com>
+Date:   Tue May 16 21:35:11 2017 -0300
+
+    inclusão do CRUD de cliente atualização do sugestão/reclamação e algumas alterações no código de produto
+
+[33mcommit dd3c7bbf0348bfa5cf93757f973c710eb21bf17c[m
+Author: mateus <mateus-vinicius19@live.com>
+Date:   Thu May 11 17:23:44 2017 -0300
+
+    adaptando ao novo banco
+
+[33mcommit 97615bc041b45d8dd58ac3c77f00fc5a2134572f[m
+Author: mateus <mateus-vinicius19@live.com>
+Date:   Thu May 11 17:12:53 2017 -0300
+
+    alteracao no usuario
+
+[33mcommit 6f911ab222d5cb8aecb0fff2ab85037fcf46c8c3[m
+Author: mateus <mateus-vinicius19@live.com>
+Date:   Thu May 11 17:08:28 2017 -0300
+
+    novo tipo de usuario
+
+[33mcommit 48e93734eb61f67929f13c4bb2b7f55e501b8bf0[m
+Author: mateus <mateus-vinicius19@live.com>
+Date:   Thu May 11 17:01:24 2017 -0300
+
+    concluir o adicionar,alterar e buscar produto, corrigir as permissoes de acesso do login e criei a vitrine para produtos
+
+[33mcommit 023a83fdef821c375ee5b80891319828076ce570[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Wed May 3 22:58:24 2017 -0300
+
+    Criei o cadastrar produto e suas dependencias
+
+[33mcommit 13a6253df55b05094f7753df5ec5830d9a8164d5[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Mon Apr 24 15:16:14 2017 -0300
+
+    mudei method para post
+
+[33mcommit 6e1257321f5888cd31b55b27789a5caf33af255b[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Mon Apr 24 13:20:29 2017 -0300
+
+    Alteracao na permissao funcionario/adm agora cada um tem um acesso
+
+[33mcommit 4ee0dc950c6ac6282b9d2f911748e2b97abc6b4a[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Thu Apr 20 20:29:57 2017 -0300
+
+    alterei o validar login, agora pode logar com o novo banco.
+
+[33mcommit ece6042448676f718b3dd0d04cedbc870c4390fb[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Thu Apr 20 20:21:48 2017 -0300
+
+    alterei o validar login, agora pode logar com o novo banco.
+
+[33mcommit abac198739213eb0ebbb06cf37dac49d2dce84b5[m
+Author: Mateus <mateus-vinicius19@live.com>
+Date:   Tue Apr 18 14:25:32 2017 -0300
+
+    criação do arquivo banco cliente,funcionario, produto e usaurio
+
+[33mcommit e8281f43345fa0fedd1ca66114dda24830dcba43[m
+Author: ProjetoWebUnidom <projetoWebUnidom@Hotmail.com>
+Date:   Thu Mar 23 20:42:47 2017 -0300
+
+    Delete README.md
+
+[33mcommit 662ff46bd133880ff46b07714197045f3903edbf[m
+Author: Reinan Bruno <reinanbruno@Hotmail.com>
+Date:   Thu Mar 23 20:36:34 2017 -0300
+
+    Meu primeiro envio
+
+[33mcommit f175f62872c6545abd8760802616144e932ae952[m
+Author: ProjetoWebUnidom <projetoWebUnidom@Hotmail.com>
+Date:   Thu Mar 23 20:22:24 2017 -0300
+
+    Initial commit
