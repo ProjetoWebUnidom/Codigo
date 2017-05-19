@@ -1,7 +1,7 @@
 <?php
   session_start();
   include "../php/permissao.php";
-perfil();
+  perfil();
 ?>
 <html>
     <head>
