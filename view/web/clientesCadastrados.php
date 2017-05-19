@@ -1,5 +1,7 @@
 <?php
   session_start();
+  include "../php/permissao.php";
+perfil();
 ?>
 <html>
     <head>
@@ -105,10 +107,6 @@
     ?>
     <body>
         <div class="container">
-            <?php
-              include "../../includes/headerAdm.html";
-             var_dump($sql);
-            ?>
             <fieldset >
                 <legend>Filtro</legend>
                 <form action="clientesCadastrados.php" method="post" >
@@ -117,42 +115,25 @@
                         <div class="col-sm-2">
                             <label class="col-sm-10" style="font-size: 15px; margin-right:5px" for="iCpf">CPF:</label>
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-7">
                             <label class="col-sm-4" style="font-size: 15px"for="iNome">Nome: </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-12" style="font-size: 15px; margin-right: 5px"for="iDtNasc">Dt. Nasc.:</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-2">
                             <input type="text" class="form-control" id="iCpf"  name="nCpf" placeholder="___.___.___-__" value="<?php echo "" . isset($_POST['nCpf']) ? $_POST['nCpf'] : '' ?>">
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-7">
                             <input type="text" class="form-control" id="iNome"  name="nNome" value="<?php echo "" . isset($_POST['nNome']) ? $_POST['nNome'] : '' ?>" placeholder="Encontre por nome">
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="iDtNasc"  name="nDtNasc" placeholder="__/__/____" value="<?php echo "" . isset($_POST['nDtNasc']) ? $_POST['nDtNasc'] : '' ?>">
                         </div>
                         <br><br><br>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="col-sm-12" style="font-size: 15px; margin-right: 5px"for="iDtNasc">Dt. Nasc.:</label>
-                        </div>
-                        <div class="col-sm-5">
-                            <label class="col-sm-12" style="font-size: 15px"for="iDtCad">Dt. Cadastro:</label>
-                        </div>
-                        <div class="col-sm-5">
-                            <label class="col-sm-12" style="font-size: 15px"for="iDtUltAce">Dt. Último Acesso:</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" id="iDtNasc"  name="nDtNasc" placeholder="__/__/____" value="<?php echo "" . isset($_POST['nDtNasc']) ? $_POST['nDtNasc'] : '' ?>">
-                        </div>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="iDtCad"  name="nDtCad" placeholder="__/__/____" value="<?php echo "" . isset($_POST['nDtCad']) ? $_POST['nDtCad'] : '' ?>">
-                        </div>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="iDtUltAce"  name="nDtUltAce" placeholder="__/__/____" value="<?php echo "" . isset($_POST['nDtUltAce']) ? $_POST['nDtUltAce'] : '' ?>">
-                        </div>
-                    </div>
-                    <br><br><br><br>
                     <div  class="col-sm-12" >
                         <div style="float: left;">
                             <button type="button" id="iLimpar" name="nLimpar"  value="btBuscar" class="btn">Limpar</button>
