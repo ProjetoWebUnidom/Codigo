@@ -50,8 +50,10 @@
                   });
 
               });
-              function relatorioCliente() {
-                  window.open('../../classes/relatorio_PDF/relatorioClientes.php', '_blank');
+
+              function imprimeText(text) {
+                  text = document;
+                  print(text);
               }
 
 
@@ -146,7 +148,7 @@
             <!--inicio Lista de clientes Cadastrados-->
             <fieldset  id="result">
                 <legend>Clientes cadastrados
-                    <button type="button"  style="float: right;  font-size:12px;height:27px " id="imprimir" <?php $disabled ?> class="btn btn-primary" onclick="relatorioCliente()" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir Relatório</button>
+                    <button type="button"  style="float: right;  font-size:12px;height:27px; padding-top:4px; " id="imprimir" <?php $disabled ?> class="btn btn-primary" onclick="imprimeText()" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir Relatório</button>
                 </legend>
 
                 <div style="background: #F8F8FF">
