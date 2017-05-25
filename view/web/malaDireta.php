@@ -114,10 +114,6 @@
                   )
               }
 
-              tinymce.init({selector: 'textarea'});
-
-
-
         </script>
     </head>
 
