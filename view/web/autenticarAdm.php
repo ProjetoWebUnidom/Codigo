@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_SESSION['ID_TipoUsuario'])){
+	unset($_SESSION['ID_TipoUsuario']);
+}
 ?>
 <html>
     <head>
@@ -10,7 +13,7 @@ session_start();
         <link rel="stylesheet" href="../../css/estilofooter.css">
         <link href="../../css/loginAdm.css" rel="stylesheet" type="text/css"/>
     </head>
-
+	<title>Acesso</title>	
     <body>
         <div class="container">
             <?php
@@ -40,8 +43,9 @@ session_start();
             </form>
                 </div>
             </div>
-
+		
             <?php
+		
                 include "../../includes/footer.html";
             ?>
         </div>
