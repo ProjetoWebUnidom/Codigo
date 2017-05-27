@@ -17,6 +17,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="../../css/estilofooter.css">
         <script src="../..js/jquery.js"></script>
         <script src="../../js/mascaras.js" type="text/javascript"></script>
+        <script src="/lib/jquery-1.12.2.min.js"></script>
+        <script src="/lib/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -24,31 +26,30 @@ and open the template in the editor.
             include "../../includes/header.html";
         ?>
         <h3 style="text-align:center;">
-            É muito importante que você preencha os dados abaixo com a maior exatidão possível. 
+            É muito importante que você preencha os dados abaixo com a maior exatidão possível.
         O endereço deve ser aquele no qual faremos o projeto que o Sr(a) deseje.</h3>
-            <form action="../php/cadastrarPedidoProjeto.php" method="post" class="form-horizontal">
+            <form action="../web/fazerpedidoConfirmacao.php" method="post" class="form-horizontal">
+
           <div class="form-group">
             <label class="control-label col-sm-2" for="iNome">*Nome:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iNome" name="nNome" required placeholder="Entre com seu nome">
+                <input type="text" class="form-control" id="iNome" name="nNome" required placeholder="Digite seu nome completo">
             </div>
             <label class="control-label col-sm-2" for="iBairro">Bairro:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="iBairro" name="nBairro" placeholder="Entre com seu bairro">
             </div>
           </div>
-          
           <div class="form-group">
             <label class="control-label col-sm-2" for="iEnd">Endereço:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iEnd" name="nEnd" placeholder="Entre com seu endereço">
+                <input type="text" class="form-control" id="iEnd" name="nEnd" placeholder="Ex: Rua da margura 08, Quadra 15">
             </div>
             <label class="control-label col-sm-2" for="iCel">*Telefone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" required id="iCel" maxlength="15" onkeypress="mascara(this)" name="nCel" placeholder="Entre com seu telefone para contato">
             </div>
           </div>
-          
           <div class="form-group">
             <label class="control-label col-sm-2" for="iEmail">*Email:</label>
             <div class="col-sm-4">
@@ -62,19 +63,19 @@ and open the template in the editor.
                 <label class="checkbox-inline"><input type="checkbox" name="projeto[]" value="Banheiro">Banheiro(s)</label>
             </div>
           </div>
-                
           <div class="form-group">
-            <label class="control-label col-sm-2" for="iDet">Como chegar:</label>
+            <label class="control-label col-sm-2" for="iDet">O que deseja?</label>
             <div class="col-sm-10">
-                <textarea id="iDet" name="nDet" rows="4" class="form-control" placeholder="Preencha este campo com detalhes que possam nos ajudar a encontrar o endereço mais facilmente"></textarea>
-            </div>  
+                <textarea id="iDet" name="nDet" rows="4" class="form-control" placeholder="Preencha este campo com detalhes de como deseja mobiliar"></textarea>
+            </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
+            <label class="col-sm-offset-1 col-sm-11" for="iDet">Campos com * são obrigatórios!</label>
           </div>
+
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="submit" class="btn btn-primary btn-block">E n  v i a r</button>
+              <button type="submit" class="btn btn-primary btn-block">Enviar</button>
             </div>
           </div>
         </form>
