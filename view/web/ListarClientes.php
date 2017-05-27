@@ -50,7 +50,7 @@ perfil();
         $sql = "DELETE FROM orcamento WHERE id=".$id;
         $conn->query($sql);
     }
-    $sql = "SELECT ID_Cliente as id , NOME_Cliente ,BAIRRO_Cliente, CIDADE_Cliente, EMAIL_Cliente,`CPF_Cliente`,CEP_Cliente,UF_Cliente FROM cliente ";
+    $sql = "SELECT ID_Cliente as id , NOME_Cliente ,BAIRRO_Cliente, CIDADE_Cliente, EMAIL_Cliente,`CPF_Cliente`,CEP_Cliente,UF_Cliente FROM cliente WHERE Ativo_Cliente = 1 ";
     $resultado = $conn->query($sql);
 
             ?>
