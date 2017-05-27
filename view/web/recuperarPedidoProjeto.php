@@ -52,9 +52,9 @@ perfil();
     }
     $sql = "SELECT SUBSTRING(pr.dt_protocolo, 1, 10) AS data_pedido,
     SUBSTRING(pr.dt_protocolo, 12) AS hora,
-    nome_orcamento, bairro_orcamento , orc.ID_Orcamento AS id, telefone_orcamento, email_orcamento ,orc.INFORMACAO_Orcamento as item
-    FROM orcamento orc
-    INNER JOIN protocolo pr ON pr.id_orcamento=orc.id_orcamento";
+    nome_projeto, bairro_projeto , orc.ID_projeto AS id, telefone_projeto, email_projeto ,orc.INFORMACAO_projeto AS item
+    FROM projeto orc
+    INNER JOIN protocolo pr ON pr.id_projeto=orc.id_projeto";
     $resultado = $conn->query($sql);
 
             ?>
@@ -92,10 +92,10 @@ perfil();
                                 echo "<tr>";
                                     echo "<td>".$row["data_pedido"]."</td>";
                                     echo "<td>".$row["hora"]."</td>";
-                                    echo "<td>".$row["nome_orcamento"]."</td>";
-                                    echo "<td>".$row["telefone_orcamento"]."</td>";
-                                    echo "<td>".$row["email_orcamento"]."</td>";
-                                    echo "<td>".$row["bairro_orcamento"]."</td>";
+                                    echo "<td>".$row["nome_projeto"]."</td>";
+                                    echo "<td>".$row["telefone_projeto"]."</td>";
+                                    echo "<td>".$row["email_projeto"]."</td>";
+                                    echo "<td>".$row["bairro_projeto"]."</td>";
                                     echo "<td>".$row["item"]."</td>";
                                     echo "<td>";
                                     echo "<a href='recuperarPedidoProjeto.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
