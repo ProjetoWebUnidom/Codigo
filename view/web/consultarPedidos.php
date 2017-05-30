@@ -26,7 +26,6 @@ session_start();
 
        <div class="container">
            <?php
-               include "../../includes/header.html";
                include "../php/permissao.php";
                redirecionarSession();
            ?>

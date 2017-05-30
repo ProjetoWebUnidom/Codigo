@@ -16,18 +16,18 @@ perfil();
         <script src="../../js/jquery.dataTables.js" type="text/javascript"></script>
         <script src="../../js/jquery.dataTables.js" type="text/javascript"></script>
         <script src='../../classes/tinymce/tinymce.min.js'></script>
-        <link rel="stylesheet" href="../../css/estilofooter.css">  
+        <link rel="stylesheet" href="../../css/estilofooter.css">
 
 
         <style>
 
             #iMsg{
                 border:solid 1px #ccc;
-                margin-top: -15px; 
+                margin-top: -15px;
                 border-radius: 5px;
-                background: -webkit-gradient(linear, left top, left bottom, from(#800000), to(#ff0000));             
-                background: -moz-linear-gradient(top, #800000, #ff0000); 
-                filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#800000', EndColorStr='#ff0000');       
+                background: -webkit-gradient(linear, left top, left bottom, from(#800000), to(#ff0000));
+                background: -moz-linear-gradient(top, #800000, #ff0000);
+                filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#800000', EndColorStr='#ff0000');
                 box-shadow: 2px 2px 0 #ccc;
             }
             .asteristico{
@@ -35,12 +35,11 @@ perfil();
                 font-size: 17px;
             }
             #fecharMsg{
-                float: right; 
+                float: right;
                 cursor:pointer
             }
         </style>
         <script>
-
 
             $(document).ready(function () {
                 $('#example').DataTable({
@@ -116,81 +115,6 @@ perfil();
                 )
             }
 
-              $(document).ready(function () {
-                  $('#example').DataTable({
-                      "pagingType": "full_numbers",
-                      "language": {
-                          "sProcessing": "Processando...",
-                          "sLengthMenu": "Mostrar _MENU_ registros",
-                          "sZeroRecords": "N&atilde;o foram encontrados resultados",
-                          "sInfo": "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
-                          "sInfoEmpty": "Mostrando de 0 at&eacute; 0 de 0 registros",
-                          "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
-                          "sInfoPostFix": "",
-                          "sSearch": "Buscar:",
-                          "sUrl": "",
-                          "oPaginate": {
-                              "sFirst": "Primeiro",
-                              "sPrevious": "Anterior",
-                              "sNext": "Seguinte",
-                              "sLast": "&Uacute;ltimo"
-                          }
-                      }
-                  });
-                  $("#iLimpar").click(function () {
-                      $('#iTema').val('');
-                      tinyMCE.get('iDescricao').setContent('');
-                  });
-
-                  $("#iNext").click(function () {
-                      if ($("#iTema").val() == "") {
-                          $('#msg').html('* Por favor, preencha o campo obrigatório!');
-                          $('.cxMsg').fadeIn();
-                          $("#iTema").focus();
-                          return false
-                      } else {
-                          $("#fecharMsg").trigger(`click`);
-                          $(".sceneOne").fadeOut('slow');
-                          $(".sceneTwo").delay('600').fadeIn('slow');
-                          $("#iSend, #iBack").show('slow');
-                          $("#iNext, #iLimpar").hide('slow');
-                      }
-                  });
-                  $("#iBack").click(function () {
-                      $(".sceneTwo").fadeOut('slow');
-                      $(".cxMsg").fadeOut('slow');
-                      $(".sceneOne").delay('600').fadeIn('slow');
-                      $("#iNext, #iLimpar").show('slow');
-                      $("#iSend, #iBack").hide('slow');
-                  });
-                  $("#fecharMsg").click(function () {
-                      $('.cxMsg').fadeOut();
-                  });
-
-                  $("#iSend").click(function () {
-                      var checkbox = $('input[type=checkbox]:checked');
-                      if (checkbox.length == 0) {
-                          $('#msg').html('<b>Atenção! </b>Marque pelo menos um contato como destinatário!');
-                          $('.cxMsg').fadeIn();
-                          return false;
-                      } else {
-                          $('#form_mala_direta').submit();
-                      }
-                  });
-              });
-              function marcarDesmarcar() {
-                  $(".marcar").each(
-                          function () {
-                              if ($(this).prop("checked")) {
-                                  $(this).prop("checked", false);
-                              } else {
-                                  $(this).prop("checked", true);
-                              }
-                          }
-                  )
-              }
-
-
         </script>
     </head>
 
@@ -204,12 +128,12 @@ perfil();
             return implode('/', array_reverse(explode("-", $data)));
         }
     }
-   
+
     $sql = "SELECT CPF_Cliente,
 	NOME_Cliente,
-        DTNASC_Cliente AS DATA_NASC, 
-        UF_Cliente, 
-        CIDADE_Cliente, 
+        DTNASC_Cliente AS DATA_NASC,
+        UF_Cliente,
+        CIDADE_Cliente,
         BAIRRO_Cliente,
         EMAIL_Cliente,
         DDD_Telefone,
@@ -236,16 +160,16 @@ perfil();
                                 <?php
                                 $query = $conn->query("SELECT ID_TipoAssuntoMalaDireta,NOME_TipoAssuntoMalaDireta FROM tipo_assuntomaladireta");
                                 while ($reg = $query->fetch_array()) {
-                                    $nome = $reg["NOME_TipoAssuntoMalaDireta"];                               
+                                    $nome = $reg["NOME_TipoAssuntoMalaDireta"];
                                     echo '<option value="' . $reg["ID_TipoAssuntoMalaDireta"] . '">' . $nome . '</option>';
-                                }                                
-                                ?>    
+                                }
+                                ?>
                             </select>
                         </div>
                         <br>
                         <br>
                     </div>
-                
+
                     <div class="form-group sceneOne">
                         <br />
                         <div class="col-sm-3">
@@ -297,7 +221,7 @@ perfil();
                         <br>
                         <div style="float: right;">
                             <button type="button" id="iLimpar"  name="nLimpar"  class="btn">Limpar</button>
-                            <button type="button" id="iBack" name="nLeft"   class="btn  btn-primary" style="display: none"> Voltar</button>
+                            <button type="button" id="iBack" name="nLeft"   class="btn  btn-primary" style="display: none"><< Voltar</button>
                             <button type="button" id="iNext" name="nNext"   class="btn btn-primary ">Próxima >></button>
                             <button type="button" id="iSend" name="nSend"   value="btEnviar" style="display: none" class="btn btn-primary" ><b>Enviar</b></button>
                         </div>
