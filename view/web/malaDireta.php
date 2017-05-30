@@ -41,6 +41,7 @@ perfil();
         </style>
         <script>
 
+
             $(document).ready(function () {
                 $('#example').DataTable({
                     "pagingType": "full_numbers",
@@ -114,6 +115,81 @@ perfil();
                         }
                 )
             }
+
+              $(document).ready(function () {
+                  $('#example').DataTable({
+                      "pagingType": "full_numbers",
+                      "language": {
+                          "sProcessing": "Processando...",
+                          "sLengthMenu": "Mostrar _MENU_ registros",
+                          "sZeroRecords": "N&atilde;o foram encontrados resultados",
+                          "sInfo": "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
+                          "sInfoEmpty": "Mostrando de 0 at&eacute; 0 de 0 registros",
+                          "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+                          "sInfoPostFix": "",
+                          "sSearch": "Buscar:",
+                          "sUrl": "",
+                          "oPaginate": {
+                              "sFirst": "Primeiro",
+                              "sPrevious": "Anterior",
+                              "sNext": "Seguinte",
+                              "sLast": "&Uacute;ltimo"
+                          }
+                      }
+                  });
+                  $("#iLimpar").click(function () {
+                      $('#iTema').val('');
+                      tinyMCE.get('iDescricao').setContent('');
+                  });
+
+                  $("#iNext").click(function () {
+                      if ($("#iTema").val() == "") {
+                          $('#msg').html('* Por favor, preencha o campo obrigatório!');
+                          $('.cxMsg').fadeIn();
+                          $("#iTema").focus();
+                          return false
+                      } else {
+                          $("#fecharMsg").trigger(`click`);
+                          $(".sceneOne").fadeOut('slow');
+                          $(".sceneTwo").delay('600').fadeIn('slow');
+                          $("#iSend, #iBack").show('slow');
+                          $("#iNext, #iLimpar").hide('slow');
+                      }
+                  });
+                  $("#iBack").click(function () {
+                      $(".sceneTwo").fadeOut('slow');
+                      $(".cxMsg").fadeOut('slow');
+                      $(".sceneOne").delay('600').fadeIn('slow');
+                      $("#iNext, #iLimpar").show('slow');
+                      $("#iSend, #iBack").hide('slow');
+                  });
+                  $("#fecharMsg").click(function () {
+                      $('.cxMsg').fadeOut();
+                  });
+
+                  $("#iSend").click(function () {
+                      var checkbox = $('input[type=checkbox]:checked');
+                      if (checkbox.length == 0) {
+                          $('#msg').html('<b>Atenção! </b>Marque pelo menos um contato como destinatário!');
+                          $('.cxMsg').fadeIn();
+                          return false;
+                      } else {
+                          $('#form_mala_direta').submit();
+                      }
+                  });
+              });
+              function marcarDesmarcar() {
+                  $(".marcar").each(
+                          function () {
+                              if ($(this).prop("checked")) {
+                                  $(this).prop("checked", false);
+                              } else {
+                                  $(this).prop("checked", true);
+                              }
+                          }
+                  )
+              }
+
 
         </script>
     </head>
@@ -221,7 +297,7 @@ perfil();
                         <br>
                         <div style="float: right;">
                             <button type="button" id="iLimpar"  name="nLimpar"  class="btn">Limpar</button>
-                            <button type="button" id="iBack" name="nLeft"   class="btn  btn-primary" style="display: none"><< Voltar</button>
+                            <button type="button" id="iBack" name="nLeft"   class="btn  btn-primary" style="display: none"> Voltar</button>
                             <button type="button" id="iNext" name="nNext"   class="btn btn-primary ">Próxima >></button>
                             <button type="button" id="iSend" name="nSend"   value="btEnviar" style="display: none" class="btn btn-primary" ><b>Enviar</b></button>
                         </div>

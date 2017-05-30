@@ -6,7 +6,11 @@ session_start();
  <html>
      <head>
 
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
+
+         <meta charset="UTF-8">
+
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
          <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -19,6 +23,7 @@ session_start();
      <body>
 
 
+
        <div class="container">
            <?php
                include "../../includes/header.html";
@@ -26,7 +31,10 @@ session_start();
                redirecionarSession();
            ?>
 
-
+       <div class="container">
+           <?php
+               include "../../includes/header.html";
+           ?>
            <form method="post"  id="formExemplo" data-toggle="validator" role="form" class="form-horizontal">
 
            <div class="form-group">
@@ -100,7 +108,9 @@ session_start();
                               "sLengthMenu":   "Mostrar _MENU_ registros",
                               "sZeroRecords":  "N&atilde;o foram encontrados resultados",
                               "sInfo":         "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
+
                               "sInfoEmpty":    "Mostrando de 0 at&eacute; 0 registros",
+
                               "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
                               "sInfoPostFix":  "",
                               "sSearch":       "Filtrar:",
