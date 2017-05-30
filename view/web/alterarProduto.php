@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+     
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>Karina</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -90,7 +91,7 @@
               </div>
             <label class="control-label col-sm-2">Foto:</label>
                 <div class="form-group">
-                  <div class="col=sm-2">
+                  <div class="col-sm-12">
                     <input type="file"  name="arquivo">
                   </div>
               </div>

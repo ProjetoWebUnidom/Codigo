@@ -11,7 +11,8 @@ and open the template in the editor.
 -->
 <html>
   <head>
-      <meta charset="UTF-8">
+       
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
       <title>Novo Cliente</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -29,6 +30,40 @@ and open the template in the editor.
 
       </script>
     </head>
+
+    <?php
+        if(isset($_GET["cpf"]) && $_GET["cpf"]==1){
+     ?>
+        <center>
+          <div class="alert alert-warning alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Atenção!</strong>O CPF informado já se encontra cadastrado.
+            </div>
+        </center>
+      <?php } ?>
+
+      <?php
+          if(isset($_GET["email"]) && $_GET["email"]==1){
+       ?>
+          <center>
+            <div class="alert alert-warning alert-dismissable fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Atenção!</strong>O email informado já se encontra cadastrado.
+              </div>
+          </center>
+        <?php } ?>
+
+    <?php
+        if(isset($_GET["ok"]) && $_GET["ok"]==1){
+     ?>
+        <center>
+          <div class="alert alert-info alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Sucesso!</strong>Cliente cadastrado.
+          </div>
+        </center>
+      <?php } ?>
+
     <body>
         <div class="container">
         <h2 style="text-align:center;">Novo cliente</h2>
@@ -53,22 +88,22 @@ and open the template in the editor.
           <div class="form-group">
             <label class="control-label col-sm-2" for="iNome">*Nome:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iNome" maxlength="150" required name="nNome" value="<?php echo "".isset( $_POST["nome"])?$_POST["nome"]: ''?>" placeholder="Entre com seu nome">
+                <input type="text" class="form-control" id="iNome" maxlength="150" required name="nNome"  placeholder="Entre com seu nome">
             </div>
             <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCpf" name="nCpf" required value="<?php echo "".isset($_GET['cpf'])? $_GET['cpf'] : ''?>" placeholder="Insira o CPF do cliente">
+                <input type="text" class="form-control" id="iCpf" name="nCpf" required  placeholder="Insira o CPF do cliente">
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="iRG">*RG:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iRG" maxlength="10" onkeypress="mascara(this)" name="nRG" required value="<?php echo "".isset($_GET['rg'])? $_GET['rg'] : ''?>" placeholder="Insira seu RG">
+                <input type="text" class="form-control" id="iRG" maxlength="10" onkeypress="mascara(this)" name="nRG" required  placeholder="Insira seu RG">
             </div>
             <label class="control-label col-sm-2" for="iEmail">*Email:</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="iEmail" maxlength="100" name="nEmail" required  placeholder="Insira um email válido" value="<?php echo "".isset($_GET['email'])? $_GET['email'] : ''?>">
+                <input type="email" class="form-control" id="iEmail" maxlength="100" name="nEmail" required  placeholder="Insira um email válido" >
             </div>
           </div>
 
@@ -79,7 +114,7 @@ and open the template in the editor.
             </div>
             <label class="control-label col-sm-2" for="iDtNasc">Data nascimento:</label>
             <div class="col-sm-4">
-                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" required value="<?php echo "".isset($_GET['data_nasc'])? $_GET['data_nasc'] : ''?>" placeholder="Data de nascimento do titular">
+                <input type="Date" class="form-control" id="iDtNasc" name="nDtNasc" required  placeholder="Data de nascimento do titular">
             </div>
           </div>
 
@@ -90,14 +125,14 @@ and open the template in the editor.
             </div>
             <label class="control-label col-sm-2" for="iCidade">Cidade:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="iCidade" maxlength="80" name="nCidade" placeholder="Entre com sua cidade" value="<?php echo "".isset($_GET['cidade'])? $_GET['cidade'] : ''?>"  >
+                <input type="text" class="form-control" id="iCidade" maxlength="80" name="nCidade" placeholder="Entre com sua cidade"   >
             </div>
           </div>
 
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="iCEP">CEP:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iCEP" name="nCEP" placeholder="Entre com seu CEP" value="<?php echo "".isset($_GET['CEP'])? $_GET['CEP'] : ''?>">
+                      <input type="text" class="form-control" id="iCEP" name="nCEP" placeholder="Entre com seu CEP" >
                   </div>
                   <label class="control-label col-sm-2" for="iCidade">UF:</label>
                   <div class="col-sm-4">
@@ -106,13 +141,13 @@ and open the template in the editor.
                         <option value="AL">Alagoas </option>
                         <option value="AP">Amapá</option>
                         <option value="AM">Amazonas</option>
-                        <option value="MA">Bahia</option>
+                        <option value="BA">Bahia</option>
                         <option value="CE">Ceará</option>
                         <option value="DF">Distrito Federal</option>
                         <option value="ES">Espírito Santo</option>
                         <option value="GO">Goiás</option>
                         <option value="MA">Maranhão</option>
-                        <option value="MG">Mato Grosso</option>
+                        <option value="MT">Mato Grosso</option>
                         <option value="MS">Mato Grosso do Sul</option>
                         <option value="MG">Minas Gerais</option>
                         <option value="PA">Pará</option>
@@ -128,7 +163,7 @@ and open the template in the editor.
                         <option value="SC">Santa Catarina</option>
                         <option value="SP">São Paulo</option>
                         <option value="SE">Sergipe</option>
-                        <option value="TC">Tocantins</option>
+                        <option value="TO">Tocantins</option>
                       </select></label>
                   </div>
                 </div>
@@ -136,25 +171,34 @@ and open the template in the editor.
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="iNum">Numero da casa:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iNum" maxlength="11" name="nNum" value="<?php echo "".isset( $_POST["num"])?$_POST["num"]: ''?>" placeholder="Entre com o nomero da casa">
+                      <input type="text" class="form-control" id="iNum" maxlength="11" name="nNum"  placeholder="Entre com o nomero da casa">
                   </div>
                   <label class="control-label col-sm-2" for="iBairro">Bairro:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iBairro" maxlength="80" name="nBairro" placeholder="Entre com seu bairro" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
+                      <input type="text" class="form-control" id="iBairro" maxlength="80" name="nBairro" placeholder="Entre com seu bairro">
                   </div>
                 </div>
-          <div class="form-group">
-            <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-12">
-              <button id="iEnviar" name="nEnviar" value="btCadastrar" class="btn btn-primary btn-block">E n  v i a r</button>
+
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="iEnd">Endereço:</label>
+                  <div class="col-sm-4">
+                      <input type="text" class="form-control" id="iEnd" maxlength="99" name="nEnd"  placeholder="Entre com o seu endereço">
+                  </div>
+                  </div>
+
+
+                <div class="form-group">
+                  <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <button id="iEnviar" name="nEnviar" value="btCadastrar" class="btn btn-primary btn-block">E n  v i a r</button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </div>
-        </form>
-      </div>
-    </body>
-          <?php
-              include "../../includes/footer.html";
-          ?>
+          </body>
+                <?php
+                    include "../../includes/footer.html";
+                ?>
     </html>

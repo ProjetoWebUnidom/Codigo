@@ -9,7 +9,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
         <title>Quem somos</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -27,49 +28,54 @@ and open the template in the editor.
                 text-align: justify;
                 font-size: 105%;
             }
- 
+
         </style>
     </head>
     <body>
         <div class="container">
         <?php
             include "../../includes/header.html";
+            include "../php/permissao.php";
+            redirecionarSession();
         ?>
             <div id="textos">
             <div class="col-sm-12 texto">
                 <p>
-                    No menu Inserir, as galerias incluem itens que são 
-                    projetados para corresponder à aparência geral do documento. 
-                    Você pode usar essas galerias para inserir tabelas, cabeçalhos, rodapés, 
-                    listas, folhas de rosto e outros blocos de construção do documento. Quando você 
-                    cria imagens, gráficos ou diagramas, esses elementos também são coordenados 
-                    com a aparência atual do documento. Você pode alterar facilmente a formatação do 
-                    texto selecionado no documento escolhendo uma aparência para o texto selecionado na 
-                    galeria Estilos Rápidos, na guia Início.
+                <center>
+                    <h3><b>Sobre nós</b></h3>
+                </center>
+                    <br>
+                    Na loja Karina modulados, acreditamos que cada lar é a realização de um sonho e
+                    nosso objetivo é ajudar você a completar o seu, decorando com móveis de qualidade.
+                    Para isso, reunimos as melhores soluções de venda de móveis presencialmente com projetos
+                    para sala, quarto, banheiro e cozinha, onde oferecemos inspirações para decorar cada momento da sua vida.<br><br>
+                    Ajudando você a explorar a maior variedade de móveis planejados! Através de nossos ambientes decorados,
+                    você vê como o seu móvel ficará naquele cantinho todo especial.
+                    Contribuindo juntamente com você para mobiliar sua casa com móveis modulados, aproveitando cada espaço do ambiente
+                    da melhor forma, como se fossem planejados.
                 </p>
             </div>
+
             <div class="col-sm-12 texto">
-                <p>
-                    Você também pode formatar texto diretamente usando os outros controles na guia Início. 
-                    A maioria dos controles oferece uma opção entre usar a aparência do tema 
-                    atual ou usar um formato que você pode especificar. Para alterar a aparência 
-                    geral do documento, escolha novos elementos Tema na guia Layout da Página. 
-                    Para alterar as aparências disponíveis na galeria Estilos Rápidos, use o 
-                    comando Alterar Conjunto Atual de Estilos Rápidos.
-                </p>
+
+                 <center>
+                    <h3><b>Algumas imagens de nossos projetos: </b></h3>
+                </center>
+                    <br>
+
+                <table>
+                <tr>
+                    <td><IMG src="../../imagens/projetobanheiro.jpg" WIDTH=60%>
+                    <td><IMG src="../../imagens/projetocozinha.jpg" WIDTH=60%>
+                    <td><IMG src="../../imagens/projetoquarto.jpg" WIDTH=60%>
+                    <td><IMG src="../../imagens/projetosala.jpg" WIDTH=60%>
+                </tr>
+                </table>
+
             </div>
-            <div class="col-sm-12 texto">
-                <p>
-                    As galerias Temas e Estilos Rápidos fornecem comandos de redefinição para que 
-                    você possa sempre restaurar a aparência do documento ao original contido no modelo 
-                    atual. No menu Inserir, as galerias incluem itens que são projetados para corresponder 
-                    à aparência geral do documento. Você pode usar essas galerias para inserir tabelas, 
-                    cabeçalhos, rodapés, listas, folhas de rosto e outros blocos de construção do documento. 
-                    Quando você cria imagens, gráficos ou diagramas, esses elementos também são 
-                    coordenados com a aparência atual do documento.
-                </p>
+
             </div>
-            </div>
+
         <?php
             include "../../includes/footer.html";
         ?>

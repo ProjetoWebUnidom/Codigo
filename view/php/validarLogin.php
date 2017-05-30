@@ -6,6 +6,9 @@
 
     $usuario=filter_input(INPUT_POST,'nUsuario');
     $senha=filter_input(INPUT_POST,'nSenha');
+    //Codifica a senha
+    $senha =  base64_encode($senha);
+
     echo $senha;
     echo $usuario;
     $row = buscarUsuario($conn,$usuario,$senha);
@@ -20,7 +23,6 @@
     }else{
       permissaoAcesso($permissao);
       $redirecionar = "../web/recuperarPedidoProjeto.php";
-
     }
     $conn->close();
     header("location:$redirecionar");

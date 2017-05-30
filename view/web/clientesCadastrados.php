@@ -26,7 +26,7 @@
                           "sLengthMenu": "Mostrar _MENU_ registros",
                           "sZeroRecords": "N&atilde;o foram encontrados resultados",
                           "sInfo": "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
-                          "sInfoEmpty": "Mostrando de 0 at&eacute; 0 de 0 registros",
+                          "sInfoEmpty": "Mostrando de 0 at&eacute; 0 registros",
                           "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
                           "sInfoPostFix": "",
                           "sSearch": "Buscar:",
@@ -50,8 +50,10 @@
                   });
 
               });
-              function relatorioCliente() {
-                  window.open('../../classes/relatorio_PDF/relatorioClientes.php', '_blank');
+
+              function imprimeText(text) {
+                  text = document;
+                  print(text);
               }
 
 
@@ -146,7 +148,7 @@
             <!--inicio Lista de clientes Cadastrados-->
             <fieldset  id="result">
                 <legend>Clientes cadastrados
-                    <button type="button"  style="float: right;  font-size:12px;height:27px " id="imprimir" <?php $disabled ?> class="btn btn-primary" onclick="relatorioCliente()" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir Relatório</button>
+                    <button type="button"  style="float: right;  font-size:12px;height:27px; padding-top:4px; " id="imprimir" <?php $disabled ?> class="btn btn-primary" onclick="imprimeText()" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir Relatório</button>
                 </legend>
 
                 <div style="background: #F8F8FF">

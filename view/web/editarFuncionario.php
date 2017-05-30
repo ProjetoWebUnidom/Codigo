@@ -1,7 +1,5 @@
 <?php
 session_start();
-include "../php/permissao.php";
-perfil();
 
 ?>
 <!DOCTYPE html>
@@ -12,7 +10,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
+         
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
         <title>Editar Funcionário</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,7 +25,7 @@ and open the template in the editor.
           jQuery("#iRG").mask("99.999.999-99");
           jQuery("#iCEP").mask("99.999-999");
 		  $("#subAtualizar").fadeOut();
-
+		  
 		  $("input[type='radio']").click(function(){
 			var opcao=$("input[name='optradio']:checked").val();
 			if(opcao==="buscar"){
@@ -34,36 +33,45 @@ and open the template in the editor.
 				$("#subBuscar").fadeIn();
 				$("#subExcluir").fadeIn();
 				$(":input").attr("readonly",true);
-				$("#iId").attr("readonly",false);
+				$("#iId").attr("readonly",true);
+				$("#iCpf").attr("readonly",false);
 			}else{
 				$("#subAtualizar").fadeIn();
 				$("#subBuscar").fadeOut();
 				$("#subExcluir").fadeOut();
 				$(":input").attr("readonly",false);
 				$("#iId").attr("readonly",true);
+				$("#iCpf").attr("readonly",true);
 			}
-			});
+		  });
 		});
         </script>
       </head>
   <body>
     <div class="container">
+      <?php
+      if(isset($_GET["fun"]) && $_GET["fun"]==1){
+        include "../../includes/headerFuncionario.html";
+      }else{
+        include "../../includes/headerAdm.html";
+      }
+      ?>
       <h2 style="text-align:center;">Editar Funcionário</h2>
       <form action="../php/alterarFuncionario.php" method="post" class="form-horizontal">
-         <div class="form-group">
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
                   <label class="radio-inline"><input type="radio" name="optradio" checked="checked" value="buscar">Buscar Funcionário</label>
                   <label class="radio-inline"><input type="radio" name="optradio" value="alterar">Alterar Funcionário</label>
             </div>
             <div class="col-sm-6">
             </div>
-          </div>
+        </div>
 
       <div id="FuncionarioExistente" class="form-group">
-        <label class="control-label col-sm-2">*Id:</label>
-          <div class="col-sm-2">
-            <input type="text" class="form-control" id="iId" name="nId" placeholder="Código do Funcionario" required value="<?php echo "".isset($_SESSION['Id_buscado'])? $_SESSION['Id_buscado'] : ''?>">
-          </div>
+        <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="iCpf" name="nCpf" required value="<?php echo "".isset($_SESSION["Cpf_buscado"])? $_SESSION["Cpf_buscado"] : ''?>" placeholder="Insira o CPF do Funcionário" >
+			</div>
           <div class="col-sm-2">
           </div>
           <div class="col-sm-offset-2 col-sm-4">
@@ -71,16 +79,15 @@ and open the template in the editor.
             <button type="submit" id="subExcluir" name="nSubId" value="btExc" class="btn btn-primary btn-block">Excluir</button>
           </div>
       </div>
-
         <div class="form-group">
           <label class="control-label col-sm-2" for="iNome">*Nome:</label>
           <div class="col-sm-4">
               <input type="text" class="form-control" id="iNome" name="nNome" readonly required value="<?php echo "".isset($_SESSION['Nome_buscado'])?$_SESSION['Nome_buscado']: ''?>" placeholder="Entre com seu nome">
           </div>
-		  <label class="control-label col-sm-2" for="iCpf">*CPF:</label>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" id="iCpf" name="nCpf" readonly required value="<?php echo "".isset($_SESSION["Cpf_buscado"])? $_SESSION["Cpf_buscado"] : ''?>" placeholder="Insira o CPF do Funcionário" >
-			</div>
+		  <label class="control-label col-sm-2">*Id:</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="iId" name="nId" placeholder="Código do Funcionario" readonly required value="<?php echo "".isset($_SESSION['Id_buscado'])? $_SESSION['Id_buscado'] : ''?>">
+          </div>
 
         </div>
 
@@ -134,37 +141,37 @@ and open the template in the editor.
               <input type="text" class="form-control" id="iNum" maxlength="11" name="nNum" readonly value="<?php echo "".isset($_SESSION['NumeroCasa_buscado'])?$_SESSION['NumeroCasa_buscado']: ''?>" placeholder="Entre com o nomero da casa">
           </div>
 
-          <label class="control-label col-sm-2" for="iCidade">UF:</label>
+          <label class="control-label col-sm-2" for="iUF">UF:</label><span><?php $UF = "".isset($_SESSION['Uf_buscado'])?$_SESSION['Uf_buscado']: ''?></span>
 		  <div class="col-sm-4">
-			  <select readonly type="text" class="form-control" id="iUF" name="nUF" size="1" >
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="AC")?"true":"false"?>" value="AC">Acre</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="AL")?"true":"false"?>" value="AL">Alagoas </option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="AP")?"true":"false"?>" value="AP">Amapá</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="AM")?"true":"false"?>" value="AM">Amazonas</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="BA")?"true":"false"?>" value="BA">Bahia</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="CE")?"true":"false"?>" value="CE">Ceará</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="DF")?"true":"false"?>" value="DF">Distrito Federal</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="ES")?"true":"false"?>" value="ES">Espírito Santo</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="GO")?"true":"false"?>" value="GO">Goiás</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="MA")?"true":"false"?>" value="MA">Maranhão</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="MT")?"true":"false"?>" value="MT">Mato Grosso</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="MS")?"true":"false"?>" value="MS">Mato Grosso do Sul</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="MG")?"true":"false"?>" value="MG">Minas Gerais</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="PA")?"true":"false"?>" value="PA">Pará</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="PB")?"true":"false"?>" value="PB">Paraíba</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="PR")?"true":"false"?>" value="PR">Paraná</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="PE")?"true":"false"?>" value="PE">Pernambuco</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="PI")?"true":"false"?>" value="PI">Piauí</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="RJ")?"true":"false"?>" value="RJ">Rio de Janeiro </option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="RN")?"true":"false"?>" value="RN">Rio Grande do Norte</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="RS")?"true":"false"?>" value="RS">Rio Grande do Sul</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="RO")?"true":"false"?>" value="RO">Rondônia</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="RR")?"true":"false"?>" value="RR">Roraima</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="SC")?"true":"false"?>" value="SC">Santa Catarina</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="SP")?"true":"false"?>" value="SP">São Paulo</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="SE")?"true":"false"?>" value="SE">Sergipe</option>
-				<option selected="<?php echo "".isset($_SESSION['Uf_buscado'])&&($_SESSION['Uf_buscado']==="TO")?"true":"false"?>" value="TO">Tocantins</option>
-			  </select></label>
+			  <select type="text" class="form-control" readonly id="iUF"  name="nUF" size="1" >               
+				<option value="AC" <?=($UF == 'AC')?'selected':''?> >Acre</option>
+                <option value="AL" <?=($UF == 'AL')?'selected':''?> >Alagoas </option>
+                <option value="AP" <?=($UF == 'AP')?'selected':''?> >Amapá</option>
+                <option value="AM" <?=($UF == 'AM')?'selected':''?> >Amazonas</option>
+                <option value="BA" <?=($UF == 'BA')?'selected':''?> >Bahia</option>
+                <option value="CE" <?=($UF == 'CE')?'selected':''?> >Ceará</option>
+                <option value="DF" <?=($UF == 'DF')?'selected':''?> >Distrito Federal</option>
+                <option value="ES" <?=($UF == 'ES')?'selected':''?> >Espírito Santo</option>
+                <option value="GO" <?=($UF == 'GO')?'selected':''?> >Goiás</option>
+                <option value="MA" <?=($UF == 'MA')?'selected':''?> >Maranhão</option>
+                <option value="MT" <?=($UF == 'MT')?'selected':''?> >Mato Grosso</option>
+                <option value="MS" <?=($UF == 'MS')?'selected':''?> >Mato Grosso do Sul</option>
+                <option value="MG" <?=($UF == 'MG')?'selected':''?> >Minas Gerais</option>
+                <option value="PA" <?=($UF == 'PA')?'selected':''?> >Pará</option>
+                <option value="PB" <?=($UF == 'PB')?'selected':''?> >Paraíba</option>
+                <option value="PR" <?=($UF == 'PR')?'selected':''?> >Paraná</option>
+                <option value="PE" <?=($UF == 'PE')?'selected':''?> >Pernambuco</option>
+                <option value="PI" <?=($UF == 'PI')?'selected':''?> >Piauí</option>
+                <option value="RJ" <?=($UF == 'RJ')?'selected':''?> >Rio de Janeiro </option>
+                <option value="RN" <?=($UF == 'RN')?'selected':''?> >Rio Grande do Norte</option>
+                <option value="RS" <?=($UF == 'RS')?'selected':''?> >Rio Grande do Sul</option>
+                <option value="RO" <?=($UF == 'RO')?'selected':''?> >Rondônia</option>
+                <option value="RR" <?=($UF == 'RR')?'selected':''?> >Roraima</option>
+                <option value="SC" <?=($UF == 'SC')?'selected':''?> >Santa Catarina</option>
+                <option value="SP" <?=($UF == 'SP')?'selected':''?> >São Paulo</option>
+                <option value="SE" <?=($UF == 'SE')?'selected':''?> >Sergipe</option>
+                <option value="TO" <?=($UF == 'TO')?'selected':''?> >Tocantins</option>
+              </select>
 		  </div>
         </div>
 
@@ -178,7 +185,18 @@ and open the template in the editor.
 			  <input type="text" class="form-control" id="iSenha" maxlength="10" name="nSenha" placeholder="Entre com sua senha" readonly required value="<?php echo "".isset($_SESSION['Senha_buscado'])? $_SESSION['Senha_buscado'] : ''?>">
 		  </div>
 		</div>
-
+		
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="iStat">Status:</label><span><?php $stat = "".isset($_SESSION['Status_buscado'])?$_SESSION['Status_buscado']: ''?></span>
+			  <div class="col-sm-4">
+				  <select type="text" class="form-control" readonly id="iStat"  name="nStat" size="1" >		
+					<option value=0 <?=($stat == 0)?'selected':''?> >INATIVO</option>
+					<option value=1 <?=($stat == 1)?'selected':''?> >ATIVO</option>
+				  </select>
+			  </div>
+		</div>
+		
+		
 		<div class="form-group">
             <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
           </div>
