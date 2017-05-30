@@ -2,6 +2,7 @@
 session_start();
 include "../php/permissao.php";
 perfil();
+blockAcess();
 ?>
 <html>
     <meta charset="utf-8" />

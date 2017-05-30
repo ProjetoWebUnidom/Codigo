@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include "../php/permissao.php";
+blockAcess();
 ?>
 <!DOCTYPE html>
 <!--
@@ -10,7 +11,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-         
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
         <title>Editar Funcionário</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -25,7 +26,7 @@ and open the template in the editor.
           jQuery("#iRG").mask("99.999.999-99");
           jQuery("#iCEP").mask("99.999-999");
 		  $("#subAtualizar").fadeOut();
-		  
+
 		  $("input[type='radio']").click(function(){
 			var opcao=$("input[name='optradio']:checked").val();
 			if(opcao==="buscar"){
@@ -143,7 +144,7 @@ and open the template in the editor.
 
           <label class="control-label col-sm-2" for="iUF">UF:</label><span><?php $UF = "".isset($_SESSION['Uf_buscado'])?$_SESSION['Uf_buscado']: ''?></span>
 		  <div class="col-sm-4">
-			  <select type="text" class="form-control" readonly id="iUF"  name="nUF" size="1" >               
+			  <select type="text" class="form-control" readonly id="iUF"  name="nUF" size="1" >
 				<option value="AC" <?=($UF == 'AC')?'selected':''?> >Acre</option>
                 <option value="AL" <?=($UF == 'AL')?'selected':''?> >Alagoas </option>
                 <option value="AP" <?=($UF == 'AP')?'selected':''?> >Amapá</option>
@@ -185,18 +186,18 @@ and open the template in the editor.
 			  <input type="text" class="form-control" id="iSenha" maxlength="10" name="nSenha" placeholder="Entre com sua senha" readonly required value="<?php echo "".isset($_SESSION['Senha_buscado'])? $_SESSION['Senha_buscado'] : ''?>">
 		  </div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="iStat">Status:</label><span><?php $stat = "".isset($_SESSION['Status_buscado'])?$_SESSION['Status_buscado']: ''?></span>
 			  <div class="col-sm-4">
-				  <select type="text" class="form-control" readonly id="iStat"  name="nStat" size="1" >		
+				  <select type="text" class="form-control" readonly id="iStat"  name="nStat" size="1" >
 					<option value=0 <?=($stat == 0)?'selected':''?> >INATIVO</option>
 					<option value=1 <?=($stat == 1)?'selected':''?> >ATIVO</option>
 				  </select>
 			  </div>
 		</div>
-		
-		
+
+
 		<div class="form-group">
             <label class="col-sm-offset-1 col-sm-11" for="iDet">* Campo obrigatório</label>
           </div>

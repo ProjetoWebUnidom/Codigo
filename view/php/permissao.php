@@ -27,6 +27,12 @@ function redirecionarSession(){
     }
 
   }}
+  function blockAcess(){
+    if(isset($_SESSION['ID_TipoUsuario']) && $_SESSION['ID_TipoUsuario'] == null){
+      if($_SESSION['ID_TipoUsuario'] == 1 || $_SESSION['ID_TipoUsuario'] == 2){
+        header("location: ../web/index.php");
+      }
+    }}
 
 function sessionFim(){
   if(isset($_SESSION["ID_TipoUsuario"])){

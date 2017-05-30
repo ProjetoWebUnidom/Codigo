@@ -2,10 +2,11 @@
     session_start();
     include "../php/permissao.php";
     perfil();
+    blockAcess();
 ?>
 <!DOCTYPE html>
 <html>
-     
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
   <head>
     <title>Karina</title>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+include "../php/permissao.php";
+blockAcess();
 ?>
 <!DOCTYPE html>
 <!--
@@ -9,7 +11,7 @@ and open the template in the editor.
 -->
 <html>
   <head>
-       
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
       <title>Novo Funcionário</title>
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -146,7 +148,7 @@ and open the template in the editor.
                       <input type="text" class="form-control" id="iBairro" maxlength="80" name="nBairro" placeholder="Entre com seu bairro" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
                   </div>
                 </div>
-				
+
 				<div class="form-group">
                   <label class="control-label col-sm-2" for="iNum">*Login:</label>
                   <div class="col-sm-4">
