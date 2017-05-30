@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php  session_start() ?>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -15,7 +13,12 @@ session_start();
         <div class="container">
             <?php
                 include "../../includes/header.html";
+                include "../php/permissao.php";
+                redirecionarSession();
+
+
                 if(isset($_GET['code'])){
+
             ?>
             <div class="alert alert-danger" style="text-align: center;font-size: 110%;">
                 <strong>Sinto muito! Você não tem autorização para entrar nesta área.</strong>

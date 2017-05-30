@@ -9,7 +9,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
         <title></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -45,7 +46,9 @@ and open the template in the editor.
     <body>
         <div class="container">
         <?php
-            include "../../includes/header.html"; 
+            include "../../includes/header.html";
+            include "../php/permissao.php";
+            redirecionarSession();
         ?>
             <form action="../php/cadastrarSugestaoReclamacao.php" method="post" class="form-horizontal">
           <div class="form-group" style="padding:15px;">

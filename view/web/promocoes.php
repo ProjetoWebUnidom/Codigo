@@ -4,7 +4,8 @@
  ?>
 <html>
     <head>
-        <meta charset="UTF-8">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
         <title></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -13,9 +14,12 @@
     </head>
     <body>
         <?php
-            include "../../includes/header.html";
+
             include "../../includes/conexao.php";
             include "../php/banco-produto.php";
+            include "../php/permissao.php";
+            redirecionarSession();
+
             $produtos = listaProdutos($conn);
             $pagina = (isset($_GET["pagina"]))? $_GET["pagina"] : 1;
             $quantidade_pg = 6;
@@ -24,37 +28,38 @@
             $inicio = ($quantidade_pg*$pagina)-$quantidade_pg;
             $total_cursos = qtdProdutos($conn,$inicio,$quantidade_pg);
         ?>
-        <div class="container" >
-            <form class="form" action="busca-produto.php" method="post">
-              <input type="search" name="busca" class="form-control">
-              <button type="button" class="btn btn-info">
-                  <label for="">Buscar</label>
-                  <span class="glyphicon glyphicon-search"></span>
-              </button>
-            </form>
-            <div class="page-header">
-                  <h2>Produtos</h2>
-            </div>
-        </div>
+          <div class="container">  
+            <?php include "../../includes/header.html";   ?>
+            <form action="pedido-detalhado.php" method="post"  data-toggle="validator" role="form" class="form-horizontal">
+              <div class="form-group">
+                  <label class="control-label col-sm-2" for="iProduto">Nome:</label>
+                  <div class="col-sm-4">
+                  <input type="text" class="form-control" id="iProduto" name="nProduto">
+              </div>
+                <div>
+                  <button type="submit" id="subId" name="nSubId" value="btBuscar" class="btn btn-primary">Consultar</button>
+                </div>
+                  <br/>
+               </div>
+           </form>
+          </div>
         <!-- produtos -->
-        <div class="container theme-showcase" role="main">
+        <div class="container theme-showcase" id="pesquisa" role="main">
               <div class="row">
                 <?php while ($produto = $total_cursos->fetch_assoc()) { ?>
                  <div class="col-sm-6 col-md-4">
                    <div class="thumbnail">
-                     <a href ="pedido-detalhado.php">
+                     <a href ="pedido-detalhado.php?prdt=<?=$produto['NOME_Produto']?>">
                        <img src="<?=$produto["DIRETORIO_Imagem"]?>" alt="Lights" style="width:100%">
                        <div class="caption text-center">
-                         <p><?=$produto["NOME_Produto"]?></p>
-                         <p><?=$produto["VALOR_produto"]?></p>
-                         <p><?=substr($produto["DESCRICAO_produto"],0,40)?></p>
-                         <?php $_SESSION['produtoNome'] = $produto['NOME_Produto'] ?>
+                           <p><?=$produto["NOME_Produto"]?></p>
+                           <p><?=$produto["VALOR_produto"]?></p>
+                           <p><?=substr($produto["DESCRICAO_produto"],0,40)?></p>
                        </div>
                      </a>
                    </div>
                  </div>
                  <?php }?>
-
         </div>
         <?php
             $pagina_posterior = $pagina + 1;

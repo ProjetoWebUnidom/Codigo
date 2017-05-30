@@ -65,14 +65,6 @@ perfil();
                         <th></th>
                         <th></th>
                     </thead>
-                    <tfoot>
-                        <th>Tipo</th>
-                        <th>Nome</th>
-                        <th>E-mail</th>
-                        <th>Destinario</th>
-                        <th></th>
-                        <th></th>
-                    </tfoot>
                     <tbody>
                         <?php
                         $rowAtual=0;

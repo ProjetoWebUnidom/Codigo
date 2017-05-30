@@ -14,8 +14,22 @@
           include "../../includes/conexao.php";
           include "../php/banco-produto.php"; ?>
     <?php
-        $nome = $_SESSION['produtoNome'];
-        $produto = buscarProduto($conn,$nome);
+    include "../php/permissao.php";
+    redirecionarSession();
+    if(isset($_POST['btBuscar']) || isset($_POST['nProduto'])){
+      $nProduto =  $_POST['nProduto'];
+      if(produtoExiste($conn,$nProduto)){
+        $nome = $_POST['nProduto'];
+      }else{
+          header("location: ../web/promocoes.php");
+
+      }
+    }
+
+    if(isset($_GET['prdt'])){
+      $nome = $_GET['prdt'];
+    }
+    $produto = buscarProduto($conn,$nome);
     ?>
     <div class="container-fluid">
       <div class="col-sm-6 col-sm-4">
@@ -23,7 +37,7 @@
           <img src="<?=$produto["DIRETORIO_Imagem"]?>" alt="Lights" style="width:100%">
         </div>
       </div>
-      <div class=""><?=$produto['NOME_produto']?></div>
+      <div class=""><?=$produto['NOME_Produto']?></div>
       <div class=""><?=$produto['DESCRICAO_produto']?></div>
       <div class=""><?=$produto['VALOR_produto']?></div>
     </div>

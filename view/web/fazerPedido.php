@@ -9,7 +9,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
         <title>Fazer_Pedido</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -24,6 +25,8 @@ and open the template in the editor.
         <div class="container">
         <?php
             include "../../includes/header.html";
+            include "../php/permissao.php";
+            redirecionarSession();
         ?>
         <h3 style="text-align:center;">
             É muito importante que você preencha os dados abaixo com a maior exatidão possível.

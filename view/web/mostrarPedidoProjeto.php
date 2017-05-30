@@ -35,12 +35,9 @@ session_start();
 
         $id=filter_input(INPUT_GET,'id');
         if(isset($_GET["id"])){
-            $sql = "SELECT SUBSTRING(pr.dt_protocolo, 1, 10) AS data_pedido,
-            SUBSTRING(pr.dt_protocolo, 12) AS hora,
-            nome_orcamento, bairro_orcamento ,Como_chegar_orcamento,INFORMACAO_Orcamento as item ,`PROJETOSOLICITADO_TipoCateg`, orc.ID_Orcamento AS id, telefone_orcamento, email_orcamento ,orc.INFORMACAO_Orcamento as item
-            FROM orcamento orc
-            INNER JOIN protocolo pr ON pr.id_orcamento=orc.id_orcamento";
-            $resultado = $conn->query($sql);
+            $sql = "SELECT `NOME_Projeto`,`EMAIL_Projeto`,`INFORMACAO_Projeto`,`BAIRRO_Projeto`,`TELEFONE_Projeto`,`STATUS_Projeto`,`ENDERECO_Projeto`
+    FROM projeto  WHERE id_projeto=".$id;
+           $resultado = $conn->query($sql);
         }
         $row = $resultado->fetch_assoc();
 
@@ -49,35 +46,35 @@ session_start();
             <?php
                 include "../../includes/headerAdm.html";
             ?>
-            <form method="post" action="../php/atualizarPedidoProjeto.php" id="formExemplo" data-toggle="validator" role="form" class="form-horizontal">
+            <form method="post" action="../php/atualizarPedidoProjeto.php?id=<?php echo $id ?>" id="formExemplo" data-toggle="validator" role="form" class="form-horizontal">
                <div class="form-group">
                     <label for="textNome" class="control-label col-sm-2">Nome:</label>
                     <div class="col-sm-4">
-                    <input id="textNome" name="nNome" class="form-control" readonly type="text" value="<?php echo $row['nome_orcamento']?>">
+                    <input id="textNome" name="nNome" class="form-control" readonly type="text" value="<?php echo $row['NOME_Projeto']?>">
                     </div>
                     <label for="textFone" class="control-label col-sm-2">Telefone:</label>
                     <div class="col-sm-4">
-                    <input id="textFone" name="nCel" class="form-control" maxlength="15" onkeypress="mascara(this)" readonly type="text" value="<?php echo $row['telefone_orcamento']?>">
+                    <input id="textFone" name="nCel" class="form-control" maxlength="15" onkeypress="mascara(this)" readonly type="text" value="<?php echo $row['TELEFONE_Projeto']?>">
                     </div>
               </div>
               <div class="form-group">
                     <label for="textEnd" class="control-label col-sm-2">Bairro:</label>
                     <div class="col-sm-4">
-                    <input id="textBai" name="nBai" class="form-control" readonly type="text" value="<?php echo $row['bairro_orcamento']?>">
+                    <input id="textBai" name="nBai" class="form-control" readonly type="text" value="<?php echo $row['BAIRRO_Projeto']?>">
                     </div>
                     <label for="textEmail" class="control-label col-sm-2">Email:</label>
                     <div class="col-sm-4">
-                    <input id="textEmail" name="nEmail" class="form-control" readonly type="email" value="<?php echo $row['email_orcamento']?>">
+                    <input id="textEmail" name="nEmail" class="form-control" readonly type="email" value="<?php echo $row['EMAIL_Projeto']?>">
                     </div>
               </div>
               <div class="form-group">
-                    <label for="textDet" class="control-label col-sm-2">Como chegar:</label>
+                    <label for="textDet" class="control-label col-sm-2">Endereço:</label>
                     <div class="col-sm-4">
-                    <textarea id="textDet" name="nDet" class="form-control" readonly maxlength="200" rows="1" cols="47"><?php echo $row['Como_chegar_orcamento']?></textarea>
+                    <textarea id="textDet" name="nDet" class="form-control" readonly maxlength="200" rows="1" cols="47"><?php echo $row['ENDERECO_Projeto']?></textarea>
                     </div>
-                    <label for="textProj" class="control-label col-sm-2">Projeto de:</label>
+                    <label for="textProj" class="control-label col-sm-2">STATUS:</label>
                     <div class="col-sm-4">
-                    <input id="textProj" name="nProjDe" class="form-control" readonly type="text" value="<?php echo $row['PROJETOSOLICITADO_TipoCateg']?>">
+                    <input id="textProj" name="nStatus" class="form-control" readonly type="text" value="<?php echo $row['STATUS_Projeto']?>">
                     </div>
               </div>
 
@@ -86,7 +83,7 @@ session_start();
                     </div>
                     <label for="textItem" class="control-label col-sm-2">item:</label>
                     <div class="col-sm-4">
-                    <input id="textItem" name="nItem" class="form-control" readonly type="text" value="<?php echo $row['item']?>">
+                    <input id="textItem" name="nItem" class="form-control" readonly type="text" value="<?php echo $row['INFORMACAO_Projeto']?>">
                     </div>
               </div>
 
@@ -99,9 +96,7 @@ session_start();
                     <button type="submit" id="btAtualizar" class="btn btn-info btn-lg" disabled>Atualizar</button>
                 </div>
               </div>
-                <input type="hidden" name="nId" value="<?php echo $row['id']?>">
-                <input type="hidden" name="nOldDdd" value="<?php echo $row['ddd']?>">
-                <input type="hidden" name="nOldNumero" value="<?php echo $row['numero']?>">
+                
            </form>
 
         <?php

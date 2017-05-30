@@ -94,6 +94,30 @@
         </script>
     </head>
 
+
+<?php
+
+    include "../../includes/conexao.php";
+    $id=filter_input(INPUT_GET,'id');
+    if(isset($_GET["id"])){
+        $sql = "DELETE FROM `protocolo` WHERE `ID_projeto` = ".$id;
+        $conn->query($sql);
+        $sql = "DELETE FROM `projeto_categoria` WHERE `ID_Projeto` =".$id;
+        $conn->query($sql);
+        $sql = "DELETE FROM projeto WHERE `ID_projeto`=".$id;
+        $conn->query($sql);
+    }
+    $sql = "SELECT SUBSTRING(pr.dt_protocolo, 1, 10) AS data_pedido,
+    SUBSTRING(pr.dt_protocolo, 12) AS hora,
+    nome_projeto, bairro_projeto , orc.ID_projeto AS id, telefone_projeto, email_projeto ,orc.INFORMACAO_projeto AS item
+    FROM projeto orc
+    INNER JOIN protocolo pr ON pr.id_projeto=orc.id_projeto";
+    $resultado = $conn->query($sql);
+
+            ?>
+            <body>
+                <div class="container">
+
     <?php
       include "../../includes/conexao.php";
       $id = filter_input(INPUT_GET, 'id');
@@ -113,6 +137,7 @@
     <body>
         <form action='../php/enviar_mala_direta.php' id='form_resposta' method='post'>
             <div class="container">
+
                 <table id="example" class="display" cellspacing="6" width="100%">
                     <thead>
                     <th>Data</th>
@@ -128,6 +153,32 @@
                     </thead>
                     <tbody>
                         <?php
+
+                        $rowAtual=0;
+                        if($resultado->num_rows > 0) {
+                            while($row = $resultado->fetch_assoc()) {
+                                if($row["id"]!=$rowAtual){
+                                echo "<tr>";
+                                    echo "<td>".$row["data_pedido"]."</td>";
+                                    echo "<td>".$row["hora"]."</td>";
+                                    echo "<td>".$row["nome_projeto"]."</td>";
+                                    echo "<td>".$row["telefone_projeto"]."</td>";
+                                    echo "<td>".$row["email_projeto"]."</td>";
+                                    echo "<td>".$row["bairro_projeto"]."</td>";
+                                    echo "<td>".$row["item"]."</td>";
+                                    echo "<td>";
+                                    echo "<a href='recuperarPedidoProjeto.php?id=".$row["id"]."'><span class='glyphicon glyphicon-remove-sign' title='Excluir'></span></a>";
+                                    echo "</td>";
+                                    echo "<td>";
+                                    echo "<a href='mostrarPedidoProjeto.php?id=".$row["id"]."' target='somethingUnique'><span class='glyphicon glyphicon-info-sign' title='Visualizar'></span></a>";
+                                  //  echo "</td>";
+                                    echo "</tr>";
+                                }
+                                $rowAtual=$row["id"];
+                            }
+                        }
+                                ?>
+
                           $rowAtual = 0;
                           if ($resultado->num_rows > 0) {
                               while ($row = $resultado->fetch_assoc()) {
@@ -167,6 +218,7 @@
                               }
                           }
                         ?>
+
                     </tbody>
                 </table>
                 <?php

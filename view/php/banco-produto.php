@@ -1,3 +1,4 @@
+
 <?php
   function inserirProduto($conn,$idCategoria,$nome,$descricao,$valor){
     $stmt = $conn->prepare("INSERT INTO produto(ID_TipoCategoria,NOME_produto,DESCRICAO_produto,VALOR_produto)
@@ -56,6 +57,17 @@
     $stmt->bind_param("s",$nome);
     $resultado = $stmt->execute();
     return $resultado;
+  }
+  function produtoExiste($conn, $nome){
+    $stmt = $conn->prepare("SELECT NOME_Produto FROM produto WHERE NOME_Produto like ?");
+    $stmt->bind_param("s", $nome);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    if($resultado->num_rows > 0){
+			return true;
+		}else{
+			return false;
+		}
   }
   function excluirFoto($conn,$id){
     $stmt = $conn->prepare("DELETE FROM `foto` WHERE ID_Produto = ?");

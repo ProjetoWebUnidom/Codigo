@@ -8,7 +8,7 @@ function validarFoto($arquivo){
   $tamanho = $arquivo["size"];
   $diretorio = "../../imagens/";
   $extensao = substr($nome, -4);
-  $novoNome = md5(time());
+  $novoNome = base64_encode(time());
   $upload = $diretorio. basename($novoNome) . $extensao;
   if(empty($_FILES['arquivo']['name'])){
     return;

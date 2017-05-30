@@ -5,7 +5,12 @@ session_start();
  <!DOCTYPE html>
  <html>
      <head>
+
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+
          <meta charset="UTF-8">
+
          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
          <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -16,6 +21,15 @@ session_start();
 
      </head>
      <body>
+
+
+
+       <div class="container">
+           <?php
+               include "../../includes/header.html";
+               include "../php/permissao.php";
+               redirecionarSession();
+           ?>
 
        <div class="container">
            <?php
@@ -40,6 +54,7 @@ session_start();
          include "../../includes/conexao.php";
              $protocolo=filter_input(INPUT_POST,'nProtocolo');
 
+
 //seleciona os orcamentos do cliente
              $sql = "SELECT DISTINCT pt.NUM_Protocolo, pj.NOME_Projeto, pj.EMAIL_Projeto, pj.STATUS_Projeto, pj.ENDERECO_Projeto,
                         tc.DESCRICAO_TipoCategoria, pc.VALOR_ProjetoCategoria
@@ -48,6 +63,7 @@ session_start();
                         INNER JOIN projeto_categoria pc ON pc.id_projeto=pj.id_projeto
                         INNER JOIN tipo_categoria tc ON tc.ID_TipoCategoria = pc.ID_TipoCategoria
                         and pt.NUM_Protocolo = ?";
+
                         $stmt=$conn->prepare($sql);
                         $stmt->bind_param('s',$protocolo);
                         $stmt->execute();
@@ -92,7 +108,9 @@ session_start();
                               "sLengthMenu":   "Mostrar _MENU_ registros",
                               "sZeroRecords":  "N&atilde;o foram encontrados resultados",
                               "sInfo":         "Mostrando de _START_ at&eacute; _END_ de _TOTAL_ registros",
-                              "sInfoEmpty":    "Mostrando de 0 at&eacute; 0 de 0 registros",
+
+                              "sInfoEmpty":    "Mostrando de 0 at&eacute; 0 registros",
+
                               "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
                               "sInfoPostFix":  "",
                               "sSearch":       "Filtrar:",

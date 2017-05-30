@@ -28,10 +28,18 @@
               $(document).ready(function () {
                   $(".texto, .img").fadeIn();
                   $("#iNovaMensagem").click(function () {
-                      window.location.href = "../web/malaDireta.php"
+                      if ($('#iNovaMensagem').attr('value') == 1) {
+                          window.location.href = "../web/recuperarPedidoProjeto.php"
+                      } else {
+                          window.location.href = "../web/malaDireta.php"
+                      }
                   });
                   $("#itentarNovamente").click(function () {
-                      window.location.href = "../web/malaDireta.php"
+                      if ($('#itentarNovamente').attr('value') == 1) {
+                          window.location.href = "../web/recuperarPedidoProjeto.php"
+                      } else {
+                          window.location.href = "../web/malaDireta.php"
+                      }
                   });
 
               });
@@ -46,28 +54,28 @@
               include "../../includes/headerAdm.html";
             ?>
             <fieldset >
-                <legend>Mala Direta</legend>
+                <legend>Envio de mensagens</legend>
 
                 <div class="form-group">
                     <br /><br />
                     <?php
                       if ($_GET['envio'] == 'sucesso') {
                           ?>
-                          <div class="texto" style="display:none"> Mala Direta enviada com sucesso!</div>
+                          <div class="texto" style="display:none"> Mensagem enviada com sucesso!</div>
                           <div style=" text-align:  center">
-                              <img src="../../imagens/check.svg" style="width: 80px; display:none" alt="sucesso" class="img" id="imgSucesso"/>
+                              <img src="../../imagens/check.png" style="width: 80px; display:none" alt="sucesso" class="img" id="imgSucesso"/>
                           </div>
                       </div>
                       <br>
                       <div  class="col-sm-12" >
                           <div style="float: right;">
-                              <button type="submit" id="iNovaMensagem" name="nNovaMensagem" style="align-items: center;"  class="btn btn-primary">Nova mensagem</button>
+                              <button type="submit" id="iNovaMensagem" name="nNovaMensagem" value="<?= $_GET['resp_'] ?>" style="align-items: center;"  class="btn btn-primary">Nova mensagem</button>
                           </div>
                       </div>
                       <?php
                   } else {
                       ?>
-                      <div class="texto" style="display:none"> Ocorreu um erro ao realizar a Mala Direta.<br> Tente novamente!</div>
+                      <div class="texto" style="display:none"> Ocorreu um erro ao realizar o envio de mensagem.<br> Tente novamente!</div>
                       <div style=" text-align:  center">
                           <img src="../../imagens/índice.png" style="width: 80px; display:none" alt="erro" class="img" id="imgErro"/>
                       </div>
@@ -75,7 +83,7 @@
               <br>
               <div  class="col-sm-12" >
                   <div style="float: right;">
-                      <button type="submit" id="itentarNovamente" name="ntentarNovamente" style="align-items: center;"  class="btn btn-primary">Tentar novamente</button>
+                      <button type="submit" id="itentarNovamente" name="ntentarNovamente"  style="align-items: center;" value="<?= $_GET['resp_'] ?>" class="btn btn-primary">Tentar novamente</button>
                   </div>
               </div>
               <?php

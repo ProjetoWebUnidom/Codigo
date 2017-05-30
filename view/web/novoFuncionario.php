@@ -1,7 +1,5 @@
 <?php
 session_start();
-include "../php/permissao.php";
-perfil();
 ?>
 <!DOCTYPE html>
 <!--
@@ -11,8 +9,10 @@ and open the template in the editor.
 -->
 <html>
   <head>
-      <meta charset="UTF-8">
-      <title>Novo Funcionário</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+      <title>Novo Funcionário</title>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="../../css/estilofooter.css">
@@ -30,6 +30,14 @@ and open the template in the editor.
     </head>
     <body>
         <div class="container">
+          <?php
+          if(isset($_GET["fun"]) && $_GET["fun"]==1){
+            include "../../includes/headerFuncionario.html";
+          }else{
+            include "../../includes/headerAdm.html";
+          }
+          ?>
+
         <h2 style="text-align:center;">Novo Funcionário</h2>
 
         <form action="../php/CadastrandoFuncionario.php" method="post" class="form-horizontal">
@@ -94,7 +102,7 @@ and open the template in the editor.
                   <div class="col-sm-4">
                       <input type="text" class="form-control" id="iCEP" name="nCEP" placeholder="Entre com seu CEP" required value="<?php echo "".isset($_GET['CEP'])? $_GET['CEP'] : ''?>">
                   </div>
-                  <label class="control-label col-sm-2" for="iCidade">UF:</label>
+                  <label class="control-label col-sm-2" for="iUF">UF:</label>
                   <div class="col-sm-4">
                       <select type="text" class="form-control" id="iUF" name="nUF" size="1" >
                         <option value="AC">Acre</option>
@@ -124,7 +132,7 @@ and open the template in the editor.
                         <option value="SP">São Paulo</option>
                         <option value="SE">Sergipe</option>
                         <option value="TO">Tocantins</option>
-                      </select></label>
+                      </select>
                   </div>
                 </div>
 
@@ -138,11 +146,11 @@ and open the template in the editor.
                       <input type="text" class="form-control" id="iBairro" maxlength="80" name="nBairro" placeholder="Entre com seu bairro" value="<?php echo "".isset($_GET['bairro'])? $_GET['bairro'] : ''?>">
                   </div>
                 </div>
-
+				
 				<div class="form-group">
                   <label class="control-label col-sm-2" for="iNum">*Login:</label>
                   <div class="col-sm-4">
-                      <input type="text" class="form-control" id="iLog" maxlength="10" name="nLog" required value=""<?php echo "".isset( $_POST["log"])?$_POST["log"]: ''?>" placeholder="Entre com o seu login"">
+                      <input type="text" class="form-control" id="iLog" maxlength="10" name="nLog" required value=""<?php echo "".isset( $_POST["log"])?$_POST["log"]: ''?>" placeholder="Entre com o seu login">
                   </div>
                   <label class="control-label col-sm-2" for="iSenha">*Senha:</label>
                   <div class="col-sm-4">
