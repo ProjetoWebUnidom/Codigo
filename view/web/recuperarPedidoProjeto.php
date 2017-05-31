@@ -42,7 +42,6 @@ blockAcess();
     </head>
 
 <?php
-
     include "../../includes/conexao.php";
     $id=filter_input(INPUT_GET,'id');
     if(isset($_GET["id"])){

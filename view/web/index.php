@@ -25,9 +25,9 @@
         <?php
             include "../../includes/header.html";
             include "../php/permissao.php";
+            sCliente();
             sessionFim();
         ?>
-
             <div class="row">
               <div class="col-sm-3">
                 <h3>Cozinhas</h3>

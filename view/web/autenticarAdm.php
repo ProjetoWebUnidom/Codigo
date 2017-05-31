@@ -14,9 +14,7 @@
             <?php
                 include "../../includes/header.html";
                 include "../php/permissao.php";
-                redirecionarSession();
-
-
+                redirecionarSession();   
                 if(isset($_GET['code'])){
 
             ?>

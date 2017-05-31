@@ -3,7 +3,7 @@
     include "../../includes/conexao.php";
     include "banco-funcionario.php";
     include "permissao.php";
-
+    fimSessionCliente();
     $usuario=filter_input(INPUT_POST,'nUsuario');
     $senha=filter_input(INPUT_POST,'nSenha');
     //Codifica a senha

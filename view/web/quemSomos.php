@@ -36,7 +36,7 @@ and open the template in the editor.
         <?php
             include "../../includes/header.html";
             include "../php/permissao.php";
-            redirecionarSession();
+            redirecionarSession();  
         ?>
             <div id="textos">
             <div class="col-sm-12 texto">
